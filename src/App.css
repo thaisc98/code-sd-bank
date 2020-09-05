@@ -7,3 +7,7 @@
 i {
   cursor: pointer;
 }
+
+.error-text > * {
+  color: rgba(204, 10, 10, 0.931);
+}

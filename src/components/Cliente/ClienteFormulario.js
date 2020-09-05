@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createCliente } from "../../state-mgmt/actions/cliente-actions";
-import { useEffect } from "react";
-import { Toast } from "../../utils/toast";
 
 const INITIAL_CLIENTE = {
   cedula: "",
@@ -27,6 +25,7 @@ const ClienteFormulario = ({ createCliente }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    setError(undefined);
     setCliente((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -42,13 +41,7 @@ const ClienteFormulario = ({ createCliente }) => {
 
       setSuccess(true);
     } catch (error) {
-      setError(error);
-      Toast.fire({
-        icon: "error",
-        title: error.response.data.error,
-      });
-
-      console.log(error);
+      setError(error.response.data.error);
     }
   };
 
@@ -101,6 +94,14 @@ const ClienteFormulario = ({ createCliente }) => {
                   onChange={handleChange}
                 />
               </div>
+              {error && (
+                <div className="error-text">
+                  <h3>
+                    <i class="fas fa-exclamation-circle"></i> Error
+                  </h3>
+                  <p>{error}</p>
+                </div>
+              )}
               <button
                 type="submit"
                 disabled={!valido}
