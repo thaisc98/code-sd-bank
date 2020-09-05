@@ -1,0 +1,5 @@
+export const CREATE_PERFIL = "CREATE_PERFIL"
+export const GET_PERFIL = "GET_PERFIL"
+export const GET_PERFILES = "GET_PERFILES"
+export const UPDATE_PERFIL = "UPDATE_PERFIL"
+export const DELETE_PERFIL = "DELETE_PERFIL"

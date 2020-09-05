@@ -13,11 +13,6 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
     fetchClientes();
   }, []);
 
-  /*
-  const clientesMapeados = clientes.map((v) => (
-    <td key={cliente._id}></td>
-  ));
-  */
   return (
     <div>
       {create && <Redirect to="/clientes/crear"></Redirect>}
@@ -25,7 +20,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
       <h1>Clientes</h1>
 
       <button onClick={() => setCreate(true)} className="btn btn-success">
-        Create
+        Crear
       </button>
 
       <table className="table table-striped">
