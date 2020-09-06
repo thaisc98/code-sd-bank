@@ -3,4 +3,5 @@ import clienteReducers from "./cliente-reducers";
 
 export default combineReducers({
   clientes: clienteReducers,
+  perfiles: perfilesReducers,
 });
