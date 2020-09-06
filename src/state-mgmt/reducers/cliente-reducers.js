@@ -25,7 +25,6 @@ export default function (state = initialState, action) {
     case CREATE_CLIENTE:
       return {
         ...state,
-        cliente: action.payload,
       };
     case DELETE_CLIENTE:
       return {

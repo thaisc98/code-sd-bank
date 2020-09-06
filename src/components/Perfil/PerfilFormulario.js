@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createCliente } from "../../state-mgmt/actions/cliente-actions";
+import { createPerfil } from "../../state-mgmt/actions/perfil-actions";
 
 const INITIAL_CLIENTE = {
-  cedula: "",
-  nombre: "",
-  apellido: "",
-  sexo: "",
+  rol: "",
+  descripcion: "",
 };
 
-const ClienteFormulario = ({ createCliente }) => {
-  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+const PerfilFormulario = ({ createPerfil }) => {
+  const [perfil, setPerfil] = useState(INITIAL_CLIENTE);
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
 
   useEffect(() => {
-    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+    const formularioValido = Object.values(perfil).every((v) => Boolean(v));
 
     setValido(formularioValido);
-  }, [cliente]);
+  }, [perfil]);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { rol, value } = event.target;
 
     setError(undefined);
-    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    setPerfil((prevState) => ({ ...prevState, [rol]: value }));
   };
 
   const handleSubmit = async (event) => {
@@ -37,7 +35,7 @@ const ClienteFormulario = ({ createCliente }) => {
         ...prev,
       }));
 
-      await createCliente(cliente);
+      await createPerfil(perfil);
 
       setSuccess(true);
     } catch (error) {
@@ -48,48 +46,28 @@ const ClienteFormulario = ({ createCliente }) => {
   return (
     <div className="mt-3 container">
       <div className="row ">
-        {success && <Redirect to="/clientes"></Redirect>}
+        {success && <Redirect to="/perfiles"></Redirect>}
         <div className="col-md-8">
           <div className="col-md-8">
-            <h4>Crear cliente</h4>
+            <h4>Crear Perfil</h4>
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
+                <label htmlFor="rol">Rol</label>
                 <input
-                  placeholder="Nombre"
-                  name="nombre"
-                  value={cliente.nombre}
-                  className="form-control"
+                  placeholder="Rol"
+                  name="rol"
+                  value={perfil.rol}
+                  className="rol-control"
                   onChange={handleChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="apellido">Apellido</label>
+                <label htmlFor="descripcion">Descripción</label>
                 <input
-                  placeholder="Apellido"
-                  name="apellido"
-                  value={cliente.apellido}
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="cedula">Cédula</label>
-                <input
-                  placeholder="1108596317"
-                  name="cedula"
-                  value={cliente.cedula}
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="sexo">Sexo</label>
-                <input
-                  placeholder="Femenino o Masculino"
-                  value={cliente.sexo}
-                  name="sexo"
+                  placeholder="Descripcion"
+                  name="descripcion"
+                  value={perfil.descripcion}
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -117,4 +95,4 @@ const ClienteFormulario = ({ createCliente }) => {
   );
 };
 
-export default connect(null, { createCliente })(ClienteFormulario);
+export default connect(null, { createPerfil })(PerfilFormulario);

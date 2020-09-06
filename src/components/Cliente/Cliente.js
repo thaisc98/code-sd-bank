@@ -28,7 +28,11 @@ const Cliente = ({ cliente, deleteCliente }) => {
 
       <td>
         <i style={editI} className="far fa-edit"></i>
-        <i onClick={() => deleteCliente(cliente._id)} style={deleteI} className="fas fa-trash-alt"></i>
+        <i
+          onClick={() => deleteCliente(cliente._id)}
+          style={deleteI}
+          className="fas fa-trash-alt"
+        ></i>
       </td>
     </tr>
   );
