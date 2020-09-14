@@ -15,7 +15,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
 
   return (
     <div>
-      {createPerfil && <Redirect to="/perfiles/crear"></Redirect>}
+      {createPerfil && <Redirect to="perfiles/crear"></Redirect>}
 
       <h1>Perfil</h1>
 
