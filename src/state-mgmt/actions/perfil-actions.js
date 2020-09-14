@@ -1,15 +1,16 @@
 import {
   FETCH_PERFILES,
-  FETCH_PERFIL,
   CREATE_PERFIL,
+  GET_PERFIL,
   DELETE_PERFIL,
   UPDATE_PERFIL,
+  FETCH_PERFIL,
 } from "../types/perfil-types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 
 export const fetchPerfiles = () => async (dispatch) => {
-  const { data } = await axios.get(`${API_URL}/perfil`);
+  const { data } = await axios.get(`${API_URL}/perfiles`);
 
   dispatch({
     type: FETCH_PERFILES,
@@ -21,7 +22,7 @@ export const getPefil = (_id) => async (dispatch) => {
   const { data } = await axios.get(`${API_URL}/perfiles/${_id}`);
 
   dispatch({
-    type: GET_PERFIL,
+    type: FETCH_PERFIL,
     payload: data,
   });
 };

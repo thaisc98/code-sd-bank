@@ -97,7 +97,7 @@ const ClienteFormulario = ({ createCliente }) => {
               {error && (
                 <div className="error-text">
                   <h3>
-                    <i class="fas fa-exclamation-circle"></i> Error
+                    <i className="fas fa-exclamation-circle"></i> Error
                   </h3>
                   <p>{error}</p>
                 </div>

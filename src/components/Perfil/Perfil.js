@@ -14,7 +14,7 @@ const Perfil = ({ perfil, deletePerfil }) => {
       <td>{perfil.descripcion}</td>
 
       <td>
-        <i style={editI} className="far fa-edit"></i>
+        <i className="far fa-edit"></i>
         <i
           onClick={() => deletePerfil(perfil._id)}
           className="fas fa-trash-alt"

@@ -20,7 +20,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
       <h1>Clientes</h1>
 
       <button onClick={() => setCreate(true)} className="btn btn-success">
-        Crear
+        Crear <i className="fas fa-plus"></i>
       </button>
 
       <table className="table table-striped">
