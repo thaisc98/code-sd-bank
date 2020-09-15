@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 
-import Cliente from "./Cliente";
+import { Table, Button } from "antd";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { fetchClientes } from "../../state-mgmt/actions/cliente-actions";
+import {
+  deleteCliente,
+  fetchClientes,
+} from "../../state-mgmt/actions/cliente-actions";
+import { getReadibleDate } from "../../utils/date-formatter";
 
 const ClienteLista = ({ fetchClientes, clientes }) => {
   const [create, setCreate] = useState(false);
@@ -13,35 +17,87 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
     fetchClientes();
   }, []);
 
+  const columns = [
+    {
+      title: "Nombre",
+      dataIndex: "nombre",
+    },
+    {
+      title: "Apellido",
+      dataIndex: "apellido",
+    },
+    {
+      title: "Cédula",
+      dataIndex: "cedula",
+    },
+    {
+      title: "Sexo",
+      dataIndex: "sexo",
+    },
+    {
+      title: "Fecha de Registro",
+      dataIndex: "created_at",
+    },
+    {
+      title: "Última actualización",
+      dataIndex: "updated_at",
+    },
+    {
+      title: "Operación",
+      key: "operacion",
+      render: () => (
+        <span>
+          <i style={editIStyles} className="far fa-edit"></i>
+          <i
+            // onClick={() => deleteCliente(cliente._id)}
+            style={deleteIStyles}
+            className="fas fa-trash-alt"
+          ></i>
+        </span>
+      ),
+    },
+  ];
+  const dataMapped =
+    clientes &&
+    clientes.map((cliente) => ({
+      ...cliente,
+      created_at: getReadibleDate(cliente.created_at),
+      updated_at: getReadibleDate(cliente.updated_at),
+      key: cliente.cedula,
+    }));
+
+  const editIStyles = {
+    color: "#48db27",
+    fontSize: "1.2rem",
+    marginRight: "20px",
+  };
+
+  const deleteIStyles = {
+    color: "#f52d1b",
+    fontSize: "1.2rem",
+  };
+
+  const titleStyles = {
+    textAlign: "center",
+    fontSize: "1.5rem",
+  };
+
+  const createBtnStyles = {
+    marginBottom: ".8rem",
+  };
+
   return (
     <div>
+      <h2 style={titleStyles}>Clientes</h2>
+      <Button
+        type="primary"
+        style={createBtnStyles}
+        onClick={() => setCreate(true)}
+      >
+        Nuevo Cliente <i className="fas fa-plus-square ml-2"></i>
+      </Button>
       {create && <Redirect to="/clientes/crear"></Redirect>}
-
-      <h1>Clientes</h1>
-
-      <button onClick={() => setCreate(true)} className="btn btn-success">
-        Crear <i className="fas fa-plus"></i>
-      </button>
-
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Cédula</th>
-            <th scope="col">Sexo</th>
-            <th scope="col">Creado en</th>
-            <th scope="col">Última actualización</th>
-            <th scope="col">Op</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clientes &&
-            clientes.map((cliente) => (
-              <Cliente key={cliente._id} cliente={cliente} />
-            ))}
-        </tbody>
-      </table>
+      <Table columns={columns} bordered dataSource={dataMapped} />
     </div>
   );
 };
@@ -49,6 +105,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
 ClienteLista.prototypes = {
   fetchClientes: PropTypes.func.isRequired,
   clientes: PropTypes.array.isRequired,
+  deleteCliente: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

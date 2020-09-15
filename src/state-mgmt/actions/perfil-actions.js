@@ -12,6 +12,8 @@ import { API_URL } from "../../utils/constants";
 export const fetchPerfiles = () => async (dispatch) => {
   const { data } = await axios.get(`${API_URL}/perfiles`);
 
+  console.log(data);
+
   dispatch({
     type: FETCH_PERFILES,
     payload: data,

@@ -46,11 +46,11 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   return (
-    <div className="mt-3 container">
+    <div>
       <div className="row ">
         {success && <Redirect to="/clientes"></Redirect>}
-        <div className="col-md-8">
-          <div className="col-md-8">
+        <div>
+          <div>
             <h4>Crear cliente</h4>
 
             <form onSubmit={handleSubmit}>
@@ -97,7 +97,7 @@ const ClienteFormulario = ({ createCliente }) => {
               {error && (
                 <div className="error-text">
                   <h3>
-                    <i className="fas fa-exclamation-circle"></i> Error
+                    <i class="fas fa-exclamation-circle"></i> Error
                   </h3>
                   <p>{error}</p>
                 </div>
