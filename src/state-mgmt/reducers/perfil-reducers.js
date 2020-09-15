@@ -36,4 +36,4 @@ const perfilesReducers = () => (state = initialState, action) => {
   }
 };
 
-export default perfilReducer;
+export default perfilesReducers;

@@ -3,13 +3,13 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPerfil } from "../../state-mgmt/actions/perfil-actions";
 
-const INITIAL_CLIENTE = {
+const INITIAL_PERFIL = {
   rol: "",
   descripcion: "",
 };
 
 const PerfilFormulario = ({ createPerfil }) => {
-  const [perfil, setPerfil] = useState(INITIAL_CLIENTE);
+  const [perfil, setPerfil] = useState(INITIAL_PERFIL);
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
@@ -31,7 +31,7 @@ const PerfilFormulario = ({ createPerfil }) => {
     event.preventDefault();
 
     try {
-      setCliente((prev) => ({
+      setPerfil((prev) => ({
         ...prev,
       }));
 
@@ -44,11 +44,11 @@ const PerfilFormulario = ({ createPerfil }) => {
   };
 
   return (
-    <div className="mt-3 container">
+    <div>
       <div className="row ">
         {success && <Redirect to="/perfiles"></Redirect>}
-        <div className="col-md-8">
-          <div className="col-md-8">
+        <div>
+          <div>
             <h4>Crear Perfil</h4>
 
             <form onSubmit={handleSubmit}>
@@ -58,7 +58,7 @@ const PerfilFormulario = ({ createPerfil }) => {
                   placeholder="Rol"
                   name="rol"
                   value={perfil.rol}
-                  className="rol-control"
+                  className="form-control"
                   onChange={handleChange}
                 />
               </div>
