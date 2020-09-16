@@ -35,6 +35,7 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   const handleSubmit = async (event) => {
+    console.log(event);
     event.preventDefault();
 
     try {
@@ -69,9 +70,7 @@ const ClienteFormulario = ({ createCliente }) => {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-  const onFinish = (values) => {
-    console.log(values);
-  };
+  const onFinish = (values) => {};
 
   return (
     <div className="row " style={paddingclientes}>
@@ -79,7 +78,7 @@ const ClienteFormulario = ({ createCliente }) => {
       <div>
         <div>
           <h4>Crear cliente</h4>
-          <Form onSubmit={handleSubmit} validateMessages={validateMessages}>
+          <Form onFinish={handleSubmit} validateMessages={validateMessages}>
             <Form.Item
               name={"nombre"}
               label="Nombre"
@@ -136,7 +135,7 @@ const ClienteFormulario = ({ createCliente }) => {
                 <p>{error}</p>
               </div>
             )}
-            <Button type="primary" disabled={!valido}>
+            <Button type="primary" disabled={!valido} htmlType="submit">
               Crear
             </Button>
             {/* <button
