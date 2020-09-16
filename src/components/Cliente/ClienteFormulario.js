@@ -25,6 +25,8 @@ const ClienteFormulario = ({ createCliente }) => {
     const formularioValido = Object.values(cliente).every((v) => Boolean(v));
 
     setValido(formularioValido);
+    console.log("cliente", cliente);
+    console.log("formulario", formularioValido);
   }, [cliente]);
 
   const handleChange = (event) => {
@@ -70,7 +72,6 @@ const ClienteFormulario = ({ createCliente }) => {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-  const onFinish = (values) => {};
 
   return (
     <div className="row " style={paddingclientes}>
@@ -138,13 +139,6 @@ const ClienteFormulario = ({ createCliente }) => {
             <Button type="primary" disabled={!valido} htmlType="submit">
               Crear
             </Button>
-            {/* <button
-              type="submit"
-              disabled={!valido}
-              className="btn btn-success btn-block"
-            > */}
-            {/* <i className="fas fa-database"></i> Crear */}
-            {/* </button> */}
           </Form>
         </div>
       </div>
