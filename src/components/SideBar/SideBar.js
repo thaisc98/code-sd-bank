@@ -14,13 +14,13 @@ const SideBar = () => {
   return (
     <div>
       {redirectTo && <Redirect to={redirectTo} />}
-      <Layout className="site-layout-background">
-        <Sider width={200} className="site-layout-background">
+      <Layout>
+        <Sider width={200}>
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", borderRight: 0 }}
+            style={{ height: "auto", borderRight: 0 }}
           >
             <Menu.Item
               icon={<HomeOutlined />}

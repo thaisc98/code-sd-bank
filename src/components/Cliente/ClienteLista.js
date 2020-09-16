@@ -9,6 +9,7 @@ import {
   fetchClientes,
 } from "../../state-mgmt/actions/cliente-actions";
 import { getReadibleDate } from "../../utils/date-formatter";
+import { Layout } from "antd";
 
 const ClienteLista = ({ fetchClientes, clientes }) => {
   const [create, setCreate] = useState(false);
@@ -86,8 +87,10 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
     marginBottom: ".8rem",
   };
 
+  const { Content } = Layout;
+
   return (
-    <div>
+    <Content>
       <h2 style={titleStyles}>Clientes</h2>
       <Button
         type="primary"
@@ -98,7 +101,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
       </Button>
       {create && <Redirect to="/clientes/crear"></Redirect>}
       <Table columns={columns} bordered dataSource={dataMapped} />
-    </div>
+    </Content>
   );
 };
 

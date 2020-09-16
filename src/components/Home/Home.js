@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { Layout } from "antd";
 
 const Home = () => {
   const h2Style = {
@@ -12,16 +13,21 @@ const Home = () => {
     fontSize: "1.2rem",
   };
 
-  return (
-    <div>
-      <h2 style={h2Style}>Página principal</h2>
+  const titleStyles = {
+    textAlign: "center",
+    fontSize: "1.5rem",
+  };
 
-      <p style={pStyle}>
+  const { Content } = Layout;
+  return (
+    <Content>
+      <h2 style={titleStyles}>Página principal</h2>
+      <p>
         En esta página se presenta una breve descripción de lo que hace el Core.
         Se presentan imágenes en tarjetas, videos cortos, sliders o cualquier
         otra chulería que quieran agregar.
       </p>
-    </div>
+    </Content>
   );
 };
 
