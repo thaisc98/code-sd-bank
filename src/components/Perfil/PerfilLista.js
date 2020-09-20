@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { fetchPerfiles } from "../../state-mgmt/actions/perfil-actions";
-
-import Perfil from "./Perfil";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Button, Table } from "antd";
@@ -17,8 +15,8 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
 
   const columns = [
     {
-      title: "Nombre",
-      dataIndex: "nombre",
+      title: "Rol",
+      dataIndex: "rol",
     },
     {
       title: "Descripción",
@@ -26,11 +24,11 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
     },
     {
       title: "Creado en",
-      dataIndex: "created_at",
+      dataIndex: "createdAt",
     },
     {
       title: "Última actualización",
-      dataIndex: "updated_at",
+      dataIndex: "updatedAt",
     },
     {
       title: "Operación",
@@ -39,7 +37,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
         <span>
           <i style={editIStyles} className="far fa-edit"></i>
           <i
-            // onClick={() => deleteCliente(cliente._id)}
+            // onClick={() => deletePerfil(perfil._id)}
             style={deleteIStyles}
             className="fas fa-trash-alt"
           ></i>
@@ -98,7 +96,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
 };
 
 PerfilLista.prototypes = {
-  fetchClientes: PropTypes.func.isRequired,
+  fetchPerfiles: PropTypes.func.isRequired,
   perfiles: PropTypes.array.isRequired,
 };
 

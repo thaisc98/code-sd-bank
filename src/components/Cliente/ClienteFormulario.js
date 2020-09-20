@@ -17,16 +17,16 @@ const paddingclientes = {
 
 const ClienteFormulario = ({ createCliente }) => {
   const [cliente, setCliente] = useState(INITIAL_CLIENTE);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
 
   useEffect(() => {
     const formularioValido = Object.values(cliente).every((v) => Boolean(v));
 
-    setValido(formularioValido);
-    console.log("cliente", cliente);
     console.log("formulario", formularioValido);
+
+    setValido(formularioValido);
   }, [cliente]);
 
   const handleChange = (event) => {
@@ -34,10 +34,11 @@ const ClienteFormulario = ({ createCliente }) => {
 
     setError(undefined);
     setCliente((prevState) => ({ ...prevState, [name]: value }));
+    console.log(cliente);
   };
 
   const handleSubmit = async (event) => {
-    console.log(event);
+    console.log("event", event);
     event.preventDefault();
 
     try {
@@ -79,7 +80,10 @@ const ClienteFormulario = ({ createCliente }) => {
       <div>
         <div>
           <h4>Crear cliente</h4>
-          <Form onFinish={handleSubmit} validateMessages={validateMessages}>
+          <Form
+            onSubmitCapture={(e) => handleSubmit(e)}
+            validateMessages={validateMessages}
+          >
             <Form.Item
               name={"nombre"}
               label="Nombre"
@@ -119,7 +123,7 @@ const ClienteFormulario = ({ createCliente }) => {
                 onChange={handleChange}
               />
             </Form.Item>
-            <Form.Item name={"sexp"} label="Sexo" rules={[{ required: true }]}>
+            <Form.Item name={"sexo"} label="Sexo" rules={[{ required: true }]}>
               <Input
                 placeholder="Femenino o Masculino"
                 value={cliente.sexo}

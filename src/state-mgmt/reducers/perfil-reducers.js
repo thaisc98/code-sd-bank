@@ -10,7 +10,7 @@ const initialState = {
   perfil: {},
 };
 
-const perfilesReducers = () => (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_PERFILES:
       return {
@@ -34,6 +34,4 @@ const perfilesReducers = () => (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default perfilesReducers;
+}

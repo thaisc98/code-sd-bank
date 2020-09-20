@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPerfil } from "../../state-mgmt/actions/perfil-actions";
+import { Form, Input, Button } from "antd";
 
 const INITIAL_PERFIL = {
   rol: "",
   descripcion: "",
+};
+
+const paddingclientes = {
+  padding: "50px",
 };
 
 const PerfilFormulario = ({ createPerfil }) => {
@@ -16,7 +21,6 @@ const PerfilFormulario = ({ createPerfil }) => {
 
   useEffect(() => {
     const formularioValido = Object.values(perfil).every((v) => Boolean(v));
-
     setValido(formularioValido);
   }, [perfil]);
 
@@ -45,33 +49,34 @@ const PerfilFormulario = ({ createPerfil }) => {
 
   return (
     <div>
-      <div className="row ">
+      <div className="row " style={paddingclientes}>
         {success && <Redirect to="/perfiles"></Redirect>}
         <div>
           <div>
             <h4>Crear Perfil</h4>
-
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="rol">Rol</label>
-                <input
+            <Form onSubmitCapture={handleSubmit}>
+              <Form.Item name={"rol"} label="Rol" rules={[{ required: true }]}>
+                <Input
                   placeholder="Rol"
                   name="rol"
                   value={perfil.rol}
                   className="form-control"
                   onChange={handleChange}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="descripcion">Descripción</label>
-                <input
+              </Form.Item>
+              <Form.Item
+                name={"descripcion"}
+                label="Descripcion"
+                rules={[{ required: true }]}
+              >
+                <Input
                   placeholder="Descripcion"
                   name="descripcion"
                   value={perfil.descripcion}
                   className="form-control"
                   onChange={handleChange}
                 />
-              </div>
+              </Form.Item>
               {error && (
                 <div className="error-text">
                   <h3>
@@ -80,14 +85,10 @@ const PerfilFormulario = ({ createPerfil }) => {
                   <p>{error}</p>
                 </div>
               )}
-              <button
-                type="submit"
-                disabled={!valido}
-                className="btn btn-success btn-block"
-              >
-                <i className="fas fa-database"></i> Crear
-              </button>
-            </form>
+              <Button type="primary" disabled={!valido} htmlType="submit">
+                Crear
+              </Button>
+            </Form>
           </div>
         </div>
       </div>
