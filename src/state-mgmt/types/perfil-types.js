@@ -1,0 +1,5 @@
+export const FETCH_PERFILES = "FETCH_PERFILES";
+export const FETCH_PERFIL = "FETCH_PERFIL";
+export const CREATE_PERFIL = "CREATE_PERFIL";
+export const UPDATE_PERFIL = "UPDATE_PERFIL";
+export const DELETE_PERFIL = "DELETE_PERFIL";

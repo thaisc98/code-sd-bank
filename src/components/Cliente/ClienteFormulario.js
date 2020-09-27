@@ -1,0 +1,144 @@
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { createCliente } from "../../state-mgmt/actions/cliente-actions";
+import { Form, Input, InputNumber, Button } from "antd";
+
+const INITIAL_CLIENTE = {
+  cedula: "",
+  nombre: "",
+  apellido: "",
+  sexo: "",
+};
+
+const paddingclientes = {
+  padding: "50px",
+};
+
+const ClienteFormulario = ({ createCliente }) => {
+  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [valido, setValido] = useState(false);
+
+  useEffect(() => {
+    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+
+    setValido(formularioValido);
+  }, [cliente]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setError(undefined);
+    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    console.log(cliente);
+  };
+
+  const handleSubmit = async (event) => {
+    console.log("event", event);
+    event.preventDefault();
+
+    try {
+      await createCliente({ ...cliente });
+
+      setSuccess(true);
+    } catch (error) {
+      setError(error.response.data.error);
+    }
+  };
+
+  const validateMessages = {
+    required: "${label} es obligatorio.",
+    types: {
+      email: "${label} no es un email válido.",
+      number: "${label} no es un número válido.",
+    },
+    number: {
+      range: "${label} debe estar entre ${min} y ${max}.",
+    },
+  };
+
+  return (
+    <div className="container">
+      <div className="row " style={paddingclientes}>
+        {success && <Redirect to="/clientes"></Redirect>}
+        <div>
+          <div>
+            <h4>Crear cliente</h4>
+            <Form
+              onSubmitCapture={(e) => handleSubmit(e)}
+              validateMessages={validateMessages}
+            >
+              <Form.Item
+                name={"nombre"}
+                label="Nombre"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Nombre"
+                  name="nombre"
+                  value={cliente.nombre}
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+              <Form.Item
+                name={"apellido"}
+                label="Apellido"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Apellido"
+                  name="apellido"
+                  value={cliente.apellido}
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+              <Form.Item
+                name={"cedula"}
+                label="Cedula"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="402-XXX-XXXX"
+                  name="cedula"
+                  value={cliente.cedula}
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+              <Form.Item
+                name={"sexo"}
+                label="Sexo"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Femenino o Masculino"
+                  value={cliente.sexo}
+                  name="sexo"
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+              {error && (
+                <div className="error-text">
+                  <h3>
+                    <i class="fas fa-exclamation-circle"></i> Error
+                  </h3>
+                  <p>{error}</p>
+                </div>
+              )}
+              <Button type="primary" disabled={!valido} htmlType="submit">
+                Crear
+              </Button>
+            </Form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default connect(null, { createCliente })(ClienteFormulario);
