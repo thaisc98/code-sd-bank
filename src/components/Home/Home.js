@@ -20,7 +20,7 @@ const Home = () => {
 
   const { Content } = Layout;
   return (
-    <Content className="container">
+    <Content className="container mt-4">
       <h2 style={titleStyles}>Página principal</h2>
       <p>
         En esta página se presenta una breve descripción de lo que hace el Core.

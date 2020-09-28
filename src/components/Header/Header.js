@@ -50,8 +50,8 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
 
             {!usuarioActual.email && (
               <>
-                <Menu.Item to="/auth/inicio-sesion" key="8">
-                  Iniciar sesión
+                <Menu.Item key="8">
+                  <Link to="/auth/inicio-sesion">Inciar sesión</Link>
                 </Menu.Item>
                 <Menu.Item key="7">
                   <Link to="/auth/registro">Registro</Link>
@@ -65,13 +65,9 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-
-  return {
-    usuarioActual: state.auth.usuarioActual,
-    admin: state.auth.admin,
-  };
-};
+const mapStateToProps = (state) => ({
+  usuarioActual: state.auth.usuarioActual,
+  admin: state.auth.admin,
+});
 
 export default connect(mapStateToProps, { cerrarSesion })(Header);

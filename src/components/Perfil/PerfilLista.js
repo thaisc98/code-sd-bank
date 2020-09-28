@@ -17,18 +17,22 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
     {
       title: "Rol",
       dataIndex: "rol",
+      key: "rol",
     },
     {
       title: "Descripción",
       dataIndex: "descripcion",
+      key: "descripcion",
     },
     {
       title: "Creado en",
       dataIndex: "created_at",
+      key: "created_at",
     },
     {
       title: "Última actualización",
       dataIndex: "updated_at",
+      key: "updated_at",
     },
     {
       title: "Operación",
@@ -50,8 +54,8 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
     perfiles &&
     perfiles.map((perfil) => ({
       ...perfil,
-      created_at: getReadibleDate(perfil.created_at),
-      updated_at: getReadibleDate(perfil.updated_at),
+      created_at: getReadibleDate(perfil.createdAt),
+      updated_at: getReadibleDate(perfil.updatedAt),
       key: perfil._id,
     }));
 
@@ -76,7 +80,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       {createPerfil && <Redirect to="/perfiles/crear"></Redirect>}
 
       <h2 style={titleStyles}>Perfiles</h2>
@@ -90,7 +94,12 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
       </Button>
 
       {createPerfil && <Redirect to="/perfiles/crear"></Redirect>}
-      <Table columns={columns} bordered dataSource={dataMapped} />
+      <Table
+        className="ant-table"
+        columns={columns}
+        bordered
+        dataSource={dataMapped}
+      />
     </div>
   );
 };
@@ -100,12 +109,8 @@ PerfilLista.propTypes = {
   perfiles: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  console.log("state", state);
-
-  return {
-    perfiles: state.perfiles.perfiles,
-  };
-};
+const mapStateToProps = (state) => ({
+  perfiles: state.perfiles.perfiles,
+});
 
 export default connect(mapStateToProps, { fetchPerfiles })(PerfilLista);

@@ -32,11 +32,9 @@ const ClienteFormulario = ({ createCliente }) => {
 
     setError(undefined);
     setCliente((prevState) => ({ ...prevState, [name]: value }));
-    console.log(cliente);
   };
 
   const handleSubmit = async (event) => {
-    console.log("event", event);
     event.preventDefault();
 
     try {
@@ -60,7 +58,7 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <div className="row " style={paddingclientes}>
         {success && <Redirect to="/clientes"></Redirect>}
         <div>

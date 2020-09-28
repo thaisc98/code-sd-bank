@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import notyf from "../../utils/notyf";
 import { Redirect } from "react-router-dom";
-import { Form, Input, InputNumber, Button } from "antd";
+import { Form, Input, Button } from "antd";
 import {
   fetchAdminByCedula,
   registrarse,
@@ -60,13 +60,13 @@ const Registro = ({ registrarse, admin, fetchAdminByCedula }) => {
   };
 
   const validationMessages = {
-    required: "${label} es obligatorio!",
+    required: "El campo ${label} es obligatorio.",
     types: {
-      email: "${label} no es un email válido!",
-      number: "${label} no es un número válido!",
+      email: "${label} no es un email válido.",
+      number: "${label} no es un número válido.",
     },
     number: {
-      range: "${label} debe estar entre ${min} y ${max} caracteres",
+      range: "${label} debe estar entre ${min} y ${max} caracteres.",
     },
   };
 
@@ -99,7 +99,7 @@ const Registro = ({ registrarse, admin, fetchAdminByCedula }) => {
       {redireccion ? (
         <Redirect to="/" />
       ) : (
-        <div className="container">
+        <div className="container mt-4">
           <div className=" col-md-6">
             <h4 className="mb-4">Registrarse</h4>
             <Form

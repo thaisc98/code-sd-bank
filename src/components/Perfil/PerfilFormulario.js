@@ -15,20 +15,22 @@ const paddingclientes = {
 
 const PerfilFormulario = ({ createPerfil }) => {
   const [perfil, setPerfil] = useState(INITIAL_PERFIL);
-  const [error, setError] = useState();
+  const [deshabilitado, setDeshabilitado] = useState(true);
+  const [error, setError] = useState(undefined);
   const [success, setSuccess] = useState(false);
-  const [valido, setValido] = useState(false);
 
   useEffect(() => {
-    const formularioValido = Object.values(perfil).every((v) => Boolean(v));
-    setValido(formularioValido);
+    const formularioValido = Object.values(perfil).every((value) =>
+      Boolean(value)
+    );
+    setDeshabilitado(!formularioValido);
   }, [perfil]);
 
   const handleChange = (event) => {
-    const { rol, value } = event.target;
+    const { name, value } = event.target;
 
     setError(undefined);
-    setPerfil((prevState) => ({ ...prevState, [rol]: value }));
+    setPerfil((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
@@ -39,16 +41,20 @@ const PerfilFormulario = ({ createPerfil }) => {
         ...prev,
       }));
 
-      await createPerfil(perfil);
+      await createPerfil({ ...perfil });
 
       setSuccess(true);
     } catch (error) {
-      setError(error.response.data.error);
+      if (error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError("No se pudo crear el perfil.");
+      }
     }
   };
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <div className="row " style={paddingclientes}>
         {success && <Redirect to="/perfiles"></Redirect>}
         <div>
@@ -85,7 +91,7 @@ const PerfilFormulario = ({ createPerfil }) => {
                   <p>{error}</p>
                 </div>
               )}
-              <Button type="primary" disabled={!valido} htmlType="submit">
+              <Button type="primary" disabled={deshabilitado} htmlType="submit">
                 Crear
               </Button>
             </Form>

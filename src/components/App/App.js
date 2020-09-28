@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "../../state-mgmt/store/index";
-import "./App.css";
+import "./App.scss";
 import Home from "../Home/Home";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -15,34 +15,25 @@ import PerfilLista from "../Perfil/PerfilLista";
 import SecuredRoute from "./SecuredRoute";
 import AuthRoute from "./AuthRoute";
 import PerfilFormulario from "../Perfil/PerfilFormulario";
-import "notyf/notyf.min.css";
+import InicioSesion from "../Auth/InicioSesion";
 
-const titleStyles = {
-  margin: "auto",
-  with: "auto",
-  padding: "20px",
-};
+import "notyf/notyf.min.css";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Header />
-        <div style={titleStyles}>
+        <div>
           <Route path="/" exact component={Home} />
-          <SecuredRoute
-            path="/perfiles/crear"
-            component={PerfilFormulario}
-          />
-          <SecuredRoute
-            path="/clientes/crear"
-            component={ClienteFormulario}
-          />
-          <SecuredRoute path="/clientes"  component={ClienteLista} />
+          <SecuredRoute path="/perfiles/crear" component={PerfilFormulario} />
+          <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
+          <SecuredRoute path="/clientes" component={ClienteLista} />
 
-          <SecuredRoute path="/perfiles"  component={PerfilLista} />
+          <SecuredRoute path="/perfiles" component={PerfilLista} />
 
-          <AuthRoute path="/auth/registro"  component={Registro} />
+          <AuthRoute path="/auth/inicio-sesion" component={InicioSesion} />
+          <AuthRoute path="/auth/registro" component={Registro} />
         </div>
         <Footer />
       </Router>
