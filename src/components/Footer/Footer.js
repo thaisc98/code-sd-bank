@@ -6,19 +6,16 @@ const { Footer: FooterL } = Layout;
 const Footer = () => {
   const anio = new Date().getFullYear();
 
-  const styles = {
+  const footerStyles = {
     backgroundColor: "#001529",
-    position: "absolute",
-    left: 0,
-    bottom: 0,
-    height: "60px",
-    color: "#fafafa",
-    width: "100%",
-    overflow: "hidden",
-    textAlign: "center",
+    padding: "70px 0",
   };
 
-  return <FooterL style={styles}>SD Bank Core ©{anio}</FooterL>;
+  return (
+    <FooterL style={footerStyles} className="footer-c">
+      <p>SD Bank Core ©{anio}</p>
+    </FooterL>
+  );
 };
 
 export default Footer;

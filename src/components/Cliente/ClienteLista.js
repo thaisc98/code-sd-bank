@@ -11,7 +11,6 @@ import {
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
 
-
 const ClienteLista = ({ fetchClientes, clientes }) => {
   const [create, setCreate] = useState(false);
 
@@ -91,7 +90,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
   const { Content } = Layout;
 
   return (
-    <Content className="container">
+    <Content className="container mt-4">
       <h2 style={titleStyles}>Clientes</h2>
       <Button
         type="primary"
@@ -101,7 +100,12 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
         Nuevo Cliente <i className="fas fa-plus-square ml-2"></i>
       </Button>
       {create && <Redirect to="/clientes/crear"></Redirect>}
-      <Table columns={columns} bordered dataSource={dataMapped} />
+      <Table
+        className="ant-table"
+        columns={columns}
+        bordered
+        dataSource={dataMapped}
+      />
     </Content>
   );
 };
