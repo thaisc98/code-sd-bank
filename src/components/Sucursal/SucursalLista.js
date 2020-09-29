@@ -5,17 +5,17 @@ import { Table, Button } from "antd";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
-  deleteCliente,
-  fetchClientes,
-} from "../../state-mgmt/actions/cliente.actions";
+  deleteSucursal,
+  fetchSucursales,
+} from "../../state-mgmt/actions/sucursal.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
 
-const ClienteLista = ({ fetchClientes, clientes }) => {
+const SucursalLista = ({ fetchSucursales, sucursales }) => {
   const [create, setCreate] = useState(false);
 
   useEffect(() => {
-    fetchClientes();
+    fetchSucursales();
   }, []);
 
   const columns = [
@@ -24,19 +24,15 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
       dataIndex: "nombre",
     },
     {
-      title: "Apellido",
-      dataIndex: "apellido",
+      title: "Dirección",
+      dataIndex: "direccion",
     },
     {
-      title: "Cédula",
-      dataIndex: "cedula",
+      title: "Cajeros",
+      dataIndex: "cajeros",
     },
     {
-      title: "Sexo",
-      dataIndex: "sexo",
-    },
-    {
-      title: "Fecha de Registro",
+      title: "Fecha de creación",
       dataIndex: "createdAt",
     },
     {
@@ -50,7 +46,7 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
         <span>
           <i style={editIStyles} className="far fa-edit"></i>
           <i
-            // onClick={() => deleteCliente(cliente._id)}
+            // onClick={() => deleteSucursal(sucursal._id)}
             style={deleteIStyles}
             className="fas fa-trash-alt"
           ></i>
@@ -59,12 +55,13 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
     },
   ];
   const dataMapped =
-    clientes &&
-    clientes.map((cliente) => ({
-      ...cliente,
-      createdAt: getReadibleDate(cliente.createdAt),
-      updatedAt: getReadibleDate(cliente.updatedAt),
-      key: cliente.cedula,
+    sucursales &&
+    sucursales.map((sucursal) => ({
+      ...sucursal,
+      cajeros: sucursal.cajeros.length,
+      createdAt: getReadibleDate(sucursal.createdAt),
+      updatedAt: getReadibleDate(sucursal.updatedAt),
+      key: sucursal.cedula,
     }));
 
   const editIStyles = {
@@ -91,15 +88,15 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
 
   return (
     <Content className="container mt-4">
-      <h2 style={titleStyles}>Clientes</h2>
+      <h2 style={titleStyles}>Sucursales</h2>
       <Button
         type="primary"
         style={createBtnStyles}
         onClick={() => setCreate(true)}
       >
-        Nuevo Cliente <i className="fas fa-plus-square ml-2"></i>
+        Nueva Sucursal <i className="fas fa-plus-square ml-2"></i>
       </Button>
-      {create && <Redirect to="/clientes/crear"></Redirect>}
+      {create && <Redirect to="/sucursales/crear"></Redirect>}
       <Table
         className="ant-table"
         columns={columns}
@@ -110,14 +107,14 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
   );
 };
 
-ClienteLista.prototypes = {
-  fetchClientes: PropTypes.func.isRequired,
-  clientes: PropTypes.array.isRequired,
-  deleteCliente: PropTypes.func.isRequired,
+SucursalLista.prototypes = {
+  fetchSucursales: PropTypes.func.isRequired,
+  sucursales: PropTypes.array.isRequired,
+  // deleteSucursal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  clientes: state.clientes.clientes,
+  sucursales: state.sucursales.sucursales,
 });
 
-export default connect(mapStateToProps, { fetchClientes })(ClienteLista);
+export default connect(mapStateToProps, { fetchSucursales })(SucursalLista);

@@ -12,6 +12,9 @@ import ClienteLista from "../Cliente/ClienteLista";
 import ClienteFormulario from "../Cliente/ClienteFormulario";
 import Registro from "../Auth/Registro";
 import PerfilLista from "../Perfil/PerfilLista";
+import SucursalLista from "../Sucursal/SucursalLista";
+import CajeroLista from "../Cajero/CajeroLista";
+import CajeroFormulario from "../Cajero/CajeroFormulario";
 import SecuredRoute from "./SecuredRoute";
 import AuthRoute from "./AuthRoute";
 import PerfilFormulario from "../Perfil/PerfilFormulario";
@@ -27,8 +30,14 @@ function App() {
         <div>
           <Route path="/" exact component={Home} />
           <SecuredRoute path="/perfiles/crear" component={PerfilFormulario} />
+
           <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
           <SecuredRoute path="/clientes" component={ClienteLista} />
+
+          <SecuredRoute path="/sucursales" component={SucursalLista} />
+
+          <SecuredRoute path="/cajeros/crear" component={CajeroFormulario} />
+          <SecuredRoute path="/cajeros" component={CajeroLista} />
 
           <SecuredRoute path="/perfiles" component={PerfilLista} />
 

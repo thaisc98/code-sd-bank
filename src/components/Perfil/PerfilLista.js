@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { fetchPerfiles } from "../../state-mgmt/actions/perfil-actions";
+import { fetchPerfiles } from "../../state-mgmt/actions/perfil.actions";
 import PropTypes from "prop-types";
 import { Button, Table } from "antd";
 import { getReadibleDate } from "../../utils/date-formatter";

@@ -3,7 +3,7 @@ import { Layout, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import notyf from "../../utils/notyf";
 import { Link } from "react-router-dom";
-import { cerrarSesion } from "../../state-mgmt/actions/auth-action";
+import { cerrarSesion } from "../../state-mgmt/actions/auth.actions";
 
 import { connect } from "react-redux";
 
@@ -35,6 +35,12 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                 </Menu.Item>
                 <Menu.Item key="6">
                   <Link to="/perfiles">Perfiles</Link>
+                </Menu.Item>
+                <Menu.Item key="10">
+                  <Link to="/cajeros">Cajeros</Link>
+                </Menu.Item>
+                <Menu.Item key="11">
+                  <Link to="/sucursales">Sucursales</Link>
                 </Menu.Item>
                 <SubMenu
                   key="sub1"
