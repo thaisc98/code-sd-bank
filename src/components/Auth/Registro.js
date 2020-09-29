@@ -7,7 +7,7 @@ import { Form, Input, Button } from "antd";
 import {
   fetchAdminByCedula,
   registrarse,
-} from "../../state-mgmt/actions/auth-action";
+} from "../../state-mgmt/actions/auth.actions";
 
 const USUARIO_INICIAL = {
   cedula: "",

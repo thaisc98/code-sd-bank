@@ -1,44 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createCliente } from "../../state-mgmt/actions/cliente.actions";
-import { Form, Input, InputNumber, Button } from "antd";
+import { Redirect } from "react-router-dom";
+import { createCajero } from "../../state-mgmt/actions/cajero.actions";
 
-const INITIAL_CLIENTE = {
+import { Form, Input, Select, Button } from "antd";
+
+const { Option } = Select;
+
+const INITIAL_CAJERO = {
   cedula: "",
   nombre: "",
   apellido: "",
   sexo: "",
+  sucursal: "",
 };
 
-const paddingClientes = {
+const paddingCajeros = {
   padding: "50px",
 };
 
-const ClienteFormulario = ({ createCliente }) => {
-  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+const CajeroFormulario = ({ createCajero }) => {
+  const [cajero, setCajero] = useState(INITIAL_CAJERO);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
 
   useEffect(() => {
-    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+    const formularioValido = Object.values(cajero).every((v) => Boolean(v));
 
     setValido(formularioValido);
-  }, [cliente]);
+  }, [cajero]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setError(undefined);
-    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    setCajero((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await createCliente({ ...cliente });
+      await createCajero({ ...cajero });
 
       setSuccess(true);
     } catch (error) {
@@ -58,12 +62,12 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row " style={paddingClientes}>
-        {success && <Redirect to="/clientes"></Redirect>}
+    <div className="container ">
+      <div className="row " style={paddingCajeros}>
+        {success && <Redirect to="/cajeros"></Redirect>}
         <div>
           <div>
-            <h4>Crear cliente</h4>
+            <h4 className="mb-4">Crear cajero</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
@@ -76,7 +80,7 @@ const ClienteFormulario = ({ createCliente }) => {
                 <Input
                   placeholder="Nombre"
                   name="nombre"
-                  value={cliente.nombre}
+                  value={cajero.nombre}
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -89,7 +93,7 @@ const ClienteFormulario = ({ createCliente }) => {
                 <Input
                   placeholder="Apellido"
                   name="apellido"
-                  value={cliente.apellido}
+                  value={cajero.apellido}
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -100,9 +104,10 @@ const ClienteFormulario = ({ createCliente }) => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="402-XXX-XXXX"
+                  placeholder="Cédula"
+                  maxLength="11"
                   name="cedula"
-                  value={cliente.cedula}
+                  value={cajero.cedula}
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -114,11 +119,29 @@ const ClienteFormulario = ({ createCliente }) => {
               >
                 <Input
                   placeholder="Femenino o Masculino"
-                  value={cliente.sexo}
+                  value={cajero.sexo}
                   name="sexo"
                   className="form-control"
                   onChange={handleChange}
                 />
+              </Form.Item>
+              <Form.Item
+                name={"sucursal"}
+                label="Sucursal"
+                rules={[{ required: true }]}
+              >
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder="Seleccione una sucursal"
+                  optionFilterProp="children"
+                  // onChange={onChange}
+                >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+                ,
               </Form.Item>
               {error && (
                 <div className="error-text">
@@ -139,4 +162,4 @@ const ClienteFormulario = ({ createCliente }) => {
   );
 };
 
-export default connect(null, { createCliente })(ClienteFormulario);
+export default connect(null, { createCajero })(CajeroFormulario);

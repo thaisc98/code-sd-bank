@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { iniciarSesion } from "../../state-mgmt/actions/auth-action";
+import { iniciarSesion } from "../../state-mgmt/actions/auth.actions";
 import { connect } from "react-redux";
 import notyf from "../../utils/notyf";
 import { Form, Input, Button } from "antd";

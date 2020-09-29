@@ -1,0 +1,5 @@
+export const FETCH_CAJEROS = "FETCH_CAJEROS";
+export const FETCH_CAJERO = "FETCH_CAJERO";
+export const CREATE_CAJERO = "CREATE_CAJERO";
+export const UPDATE_CAJERO = "UPDATE_CAJERO";
+export const DELETE_CAJERO = "DELETE_CAJERO";

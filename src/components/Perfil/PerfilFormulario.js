@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createPerfil } from "../../state-mgmt/actions/perfil-actions";
+import { createPerfil } from "../../state-mgmt/actions/perfil.actions";
 import { Form, Input, Button } from "antd";
 
 const INITIAL_PERFIL = {
