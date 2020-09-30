@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { fetchPerfiles } from "../../state-mgmt/actions/perfil.actions";
+import {
+  deletePerfil,
+  fetchPerfiles,
+} from "../../state-mgmt/actions/perfil.actions";
 import PropTypes from "prop-types";
 import { Button, Table } from "antd";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { connect } from "react-redux";
+import notyf from "../../utils/notyf";
+import alertify from "alertifyjs";
 
-const PerfilLista = ({ fetchPerfiles, perfiles }) => {
+const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
   const [createPerfil, setCreatePerfil] = useState(false);
 
   useEffect(() => {
@@ -37,11 +42,11 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
     {
       title: "Operación",
       key: "operacion",
-      render: () => (
+      render: (_, perfil) => (
         <span>
           <i style={editIStyles} className="far fa-edit"></i>
           <i
-            // onClick={() => deletePerfil(perfil._id)}
+            onClick={(event) => onDeletePerfil(perfil.key, event)}
             style={deleteIStyles}
             className="fas fa-trash-alt"
           ></i>
@@ -49,6 +54,25 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
       ),
     },
   ];
+
+  const onDeletePerfil = async (_id, event) => {
+    event.preventDefault();
+
+    alertify.confirm(
+      "Confirmar eliminación",
+      "¿Seguro que desea eliminar este perfil?",
+      async () => {
+        try {
+          await deletePerfil(_id);
+
+          notyf.success("Perfil eliminado satisfactoriamente.");
+        } catch (error) {
+          notyf.error(error.response.data.error);
+        }
+      },
+      () => undefined
+    );
+  };
 
   const dataMapped =
     perfiles &&
@@ -97,6 +121,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles }) => {
       <Table
         className="ant-table"
         columns={columns}
+        pagination={{ pageSize: 10 }}
         bordered
         dataSource={dataMapped}
       />
@@ -113,4 +138,6 @@ const mapStateToProps = (state) => ({
   perfiles: state.perfiles.perfiles,
 });
 
-export default connect(mapStateToProps, { fetchPerfiles })(PerfilLista);
+export default connect(mapStateToProps, { fetchPerfiles, deletePerfil })(
+  PerfilLista
+);

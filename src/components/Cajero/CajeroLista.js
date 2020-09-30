@@ -10,8 +10,12 @@ import {
 } from "../../state-mgmt/actions/cajero.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
+import { Link } from "react-router-dom";
 
-const CajeroLista = ({ fetchCajeros, cajeros }) => {
+import notyf from "../../utils/notyf";
+import alertify from "alertifyjs";
+
+const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
   const [create, setCreate] = useState(false);
 
   useEffect(() => {
@@ -42,37 +46,49 @@ const CajeroLista = ({ fetchCajeros, cajeros }) => {
     {
       title: "Operación",
       key: "operacion",
-      render: () => (
+      render: (_, cajero) => (
         <span>
-          <i style={editIStyles} className="far fa-edit"></i>
+          {/* <Link to={`/cajeros/${cajero._id}/detalles`}></Link> */}
+          <Link to={`/cajeros/${cajero._id}/detalles`}>
+            <i className="details-i-styles fas fa-table"></i>
+          </Link>
+          <i className="edit-i-styles far fa-edit"></i>
           <i
-            // onClick={() => deleteCajero(cajero._id)}
-            style={deleteIStyles}
-            className="fas fa-trash-alt"
+            onClick={(event) => onDeleteCajero(cajero.key, event)}
+            className="delete-i-styles fas fa-trash-alt"
           ></i>
         </span>
       ),
     },
   ];
+
+  const onDeleteCajero = (_id, event) => {
+    event.preventDefault();
+
+    alertify.confirm(
+      "Confirmar eliminación",
+      "¿Seguro que desea eliminar a este cajero?",
+      async () => {
+        try {
+          await deleteCajero(_id);
+
+          notyf.success("Cajero eliminado satisfactoriamente.");
+        } catch (error) {
+          notyf.error(error.response.data.error);
+        }
+      },
+      () => undefined
+    );
+  };
+
   const dataMapped =
     cajeros &&
     cajeros.map((cajero) => ({
       ...cajero,
       createdAt: getReadibleDate(cajero.createdAt),
       updatedAt: getReadibleDate(cajero.updatedAt),
-      key: cajero.cedula,
+      key: cajero._id,
     }));
-
-  const editIStyles = {
-    color: "#48db27",
-    fontSize: "1.2rem",
-    marginRight: "20px",
-  };
-
-  const deleteIStyles = {
-    color: "#f52d1b",
-    fontSize: "1.2rem",
-  };
 
   const titleStyles = {
     textAlign: "center",
@@ -116,4 +132,6 @@ const mapStateToProps = (state) => ({
   cajeros: state.cajeros.cajeros,
 });
 
-export default connect(mapStateToProps, { fetchCajeros })(CajeroLista);
+export default connect(mapStateToProps, { fetchCajeros, deleteCajero })(
+  CajeroLista
+);

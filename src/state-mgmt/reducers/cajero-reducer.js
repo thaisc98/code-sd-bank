@@ -1,14 +1,18 @@
 import {
   FETCH_CAJEROS,
   FETCH_CAJERO,
+  FETCH_CAJERO_BY_CEDULA,
+  FETCH_USUARIO_CAJERO,
   UPDATE_CAJERO,
   CREATE_CAJERO,
   DELETE_CAJERO,
+  CREATE_CUENTA_CAJERO,
 } from "../types/cajero-types";
 
 const initialState = {
   cajeros: [],
   cajero: {},
+  cajeroUsuario: {},
 };
 
 export default function (state = initialState, action) {
@@ -23,12 +27,12 @@ export default function (state = initialState, action) {
         ...state,
         cajero: action.payload,
       };
-    case FETCH_CAJERO:
+    case FETCH_USUARIO_CAJERO:
       return {
         ...state,
-        cajero: action.payload,
+        cajeroUsuario: action.payload,
       };
-    case UPDATE_CAJERO:
+    case FETCH_CAJERO_BY_CEDULA:
       return {
         ...state,
         cajero: action.payload,
@@ -38,10 +42,23 @@ export default function (state = initialState, action) {
         ...state,
         cajero: action.payload,
       };
+    case CREATE_CUENTA_CAJERO:
+      return {
+        ...state,
+        cajeroUsuario: action.payload,
+      };
+    case UPDATE_CAJERO:
+      return {
+        ...state,
+        cajero: action.payload,
+      };
+
     case DELETE_CAJERO:
       return {
         ...state,
-        cajeros: state.cajeros.filter((item) => item._id !== action.payload),
+        cajeros: state.cajeros.filter(
+          (cajero) => cajero._id !== action.payload
+        ),
       };
     default:
       return state;

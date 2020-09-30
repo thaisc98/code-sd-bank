@@ -42,7 +42,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         sucursales: state.sucursals.filter(
-          (item) => item._id !== action.payload
+          (sucursal) => sucursal._id !== action.payload
         ),
       };
     default:

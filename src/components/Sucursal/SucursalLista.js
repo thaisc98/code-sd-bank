@@ -4,14 +4,17 @@ import { Redirect } from "react-router-dom";
 import { Table, Button } from "antd";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
 import {
   deleteSucursal,
   fetchSucursales,
 } from "../../state-mgmt/actions/sucursal.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
+import notyf from "../../utils/notyf";
+import alertify from "alertifyjs";
 
-const SucursalLista = ({ fetchSucursales, sucursales }) => {
+const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
   const [create, setCreate] = useState(false);
 
   useEffect(() => {
@@ -42,11 +45,11 @@ const SucursalLista = ({ fetchSucursales, sucursales }) => {
     {
       title: "Operación",
       key: "operacion",
-      render: () => (
+      render: (_, sucursal) => (
         <span>
           <i style={editIStyles} className="far fa-edit"></i>
           <i
-            // onClick={() => deleteSucursal(sucursal._id)}
+            onClick={(event) => onDeleteSucursal(sucursal.key, event)}
             style={deleteIStyles}
             className="fas fa-trash-alt"
           ></i>
@@ -54,6 +57,26 @@ const SucursalLista = ({ fetchSucursales, sucursales }) => {
       ),
     },
   ];
+
+  const onDeleteSucursal = (_id, event) => {
+    event.preventDefault();
+
+    alertify.confirm(
+      "Confirmar eliminación",
+      "¿Seguro que desea eliminar esta sucursal?",
+      async () => {
+        try {
+          await deleteSucursal(_id);
+
+          notyf.success("Sucursal eliminada satisfactoriamente.");
+        } catch (error) {
+          notyf.error(error.response.data.error);
+        }
+      },
+      () => undefined
+    );
+  };
+
   const dataMapped =
     sucursales &&
     sucursales.map((sucursal) => ({
@@ -61,7 +84,7 @@ const SucursalLista = ({ fetchSucursales, sucursales }) => {
       cajeros: sucursal.cajeros.length,
       createdAt: getReadibleDate(sucursal.createdAt),
       updatedAt: getReadibleDate(sucursal.updatedAt),
-      key: sucursal.cedula,
+      key: sucursal._id,
     }));
 
   const editIStyles = {
@@ -110,11 +133,13 @@ const SucursalLista = ({ fetchSucursales, sucursales }) => {
 SucursalLista.prototypes = {
   fetchSucursales: PropTypes.func.isRequired,
   sucursales: PropTypes.array.isRequired,
-  // deleteSucursal: PropTypes.func.isRequired,
+  deleteSucursal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   sucursales: state.sucursales.sucursales,
 });
 
-export default connect(mapStateToProps, { fetchSucursales })(SucursalLista);
+export default connect(mapStateToProps, { deleteSucursal, fetchSucursales })(
+  SucursalLista
+);
