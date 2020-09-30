@@ -11,7 +11,10 @@ import {
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
 
-const ClienteLista = ({ fetchClientes, clientes }) => {
+import notyf from "../../utils/notyf";
+import alertify from "alertifyjs";
+
+const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
   const [create, setCreate] = useState(false);
 
   useEffect(() => {
@@ -46,11 +49,11 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
     {
       title: "Operación",
       key: "operacion",
-      render: () => (
+      render: (_, cliente) => (
         <span>
           <i style={editIStyles} className="far fa-edit"></i>
           <i
-            // onClick={() => deleteCliente(cliente._id)}
+            onClick={(event) => onDeleteCliente(cliente.key, event)}
             style={deleteIStyles}
             className="fas fa-trash-alt"
           ></i>
@@ -58,13 +61,33 @@ const ClienteLista = ({ fetchClientes, clientes }) => {
       ),
     },
   ];
+
+  const onDeleteCliente = (_id, event) => {
+    event.preventDefault();
+
+    alertify.confirm(
+      "Confirmar eliminación",
+      "¿Seguro que desea eliminar a este cliente?",
+      async () => {
+        try {
+          await deleteCliente(_id);
+
+          notyf.success("Cliente eliminado satisfactoriamente.");
+        } catch (error) {
+          notyf.error(error.response.data.error);
+        }
+      },
+      () => undefined
+    );
+  };
+
   const dataMapped =
     clientes &&
     clientes.map((cliente) => ({
       ...cliente,
       createdAt: getReadibleDate(cliente.createdAt),
       updatedAt: getReadibleDate(cliente.updatedAt),
-      key: cliente.cedula,
+      key: cliente._id,
     }));
 
   const editIStyles = {
@@ -120,4 +143,6 @@ const mapStateToProps = (state) => ({
   clientes: state.clientes.clientes,
 });
 
-export default connect(mapStateToProps, { fetchClientes })(ClienteLista);
+export default connect(mapStateToProps, { fetchClientes, deleteCliente })(
+  ClienteLista
+);

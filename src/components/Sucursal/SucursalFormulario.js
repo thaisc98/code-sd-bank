@@ -1,44 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createCliente } from "../../state-mgmt/actions/cliente.actions";
+import { Redirect } from "react-router-dom";
+import { createSucursal } from "../../state-mgmt/actions/sucursal.actions";
+import notyf from "../../utils/notyf";
 import { Form, Input, Button } from "antd";
 
-const INITIAL_CLIENTE = {
-  cedula: "",
+const INITIAL_SUCURSAL = {
   nombre: "",
-  apellido: "",
-  sexo: "",
+  ciudad: "",
+  calle: "",
+  numero: "",
+  codigo_postal: "",
 };
 
-const paddingClientes = {
+const paddingSucursales = {
   padding: "50px",
 };
 
-const ClienteFormulario = ({ createCliente }) => {
-  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+const SucursalFormulario = ({ createSucursal }) => {
+  const [sucursal, setSucursal] = useState(INITIAL_SUCURSAL);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
 
   useEffect(() => {
-    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+    const formularioValido = Object.values(sucursal).every((v) => Boolean(v));
 
     setValido(formularioValido);
-  }, [cliente]);
+  }, [sucursal]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setError(undefined);
-    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    setSucursal((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await createCliente({ ...cliente });
+      await createSucursal({ ...sucursal });
+
+      notyf.success("¡Cajero creado satisfactoriamente!");
 
       setSuccess(true);
     } catch (error) {
@@ -47,7 +51,7 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   const validateMessages = {
-    required: "${label} es obligatorio.",
+    required: "El campo ${label} es obligatorio.",
     types: {
       email: "${label} no es un email válido.",
       number: "${label} no es un número válido.",
@@ -58,12 +62,12 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row " style={paddingClientes}>
-        {success && <Redirect to="/clientes"></Redirect>}
+    <div className="container ">
+      <div className="row " style={paddingSucursales}>
+        {success && <Redirect to="/sucursales"></Redirect>}
         <div>
           <div>
-            <h4>Crear cliente</h4>
+            <h4 className="mb-4">Crear sucursal</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
@@ -76,50 +80,65 @@ const ClienteFormulario = ({ createCliente }) => {
                 <Input
                   placeholder="Nombre"
                   name="nombre"
-                  value={cliente.nombre}
+                  value={sucursal.nombre}
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item
-                name={"apellido"}
-                label="Apellido"
+                name={"ciudad"}
+                label="Ciudad"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Apellido"
-                  name="apellido"
-                  value={cliente.apellido}
+                  placeholder="Ciudad"
+                  name="ciudad"
+                  value={sucursal.ciudad}
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item
-                name={"cedula"}
-                label="Cedula"
+                name={"calle"}
+                label="Calle"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="402-XXX-XXXX"
-                  name="cedula"
-                  value={cliente.cedula}
+                  placeholder="Calle"
+                  name="calle"
+                  value={sucursal.calle}
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item
-                name={"sexo"}
-                label="Sexo"
+                name={"numero"}
+                label="Número"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Femenino o Masculino"
-                  value={cliente.sexo}
-                  name="sexo"
+                  placeholder="Número"
+                  value={sucursal.numero}
+                  name="numero"
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
+              <Form.Item
+                name={"codigo_postal"}
+                label="Código postal"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Código postal"
+                  value={sucursal.codigo_postal}
+                  maxLength="6"
+                  name="codigo_postal"
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+
               {error && (
                 <div className="error-text">
                   <h3>
@@ -139,4 +158,4 @@ const ClienteFormulario = ({ createCliente }) => {
   );
 };
 
-export default connect(null, { createCliente })(ClienteFormulario);
+export default connect(null, { createSucursal })(SucursalFormulario);

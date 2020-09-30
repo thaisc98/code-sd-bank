@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createCajero } from "../../state-mgmt/actions/cajero.actions";
-
+import { fetchSucursales } from "../../state-mgmt/actions/sucursal.actions";
+import PropTypes from "prop-types";
 import { Form, Input, Select, Button } from "antd";
+import notyf from "../../utils/notyf";
 
 const { Option } = Select;
 
@@ -12,24 +14,28 @@ const INITIAL_CAJERO = {
   nombre: "",
   apellido: "",
   sexo: "",
-  sucursal: "",
 };
 
 const paddingCajeros = {
   padding: "50px",
 };
 
-const CajeroFormulario = ({ createCajero }) => {
+const CajeroFormulario = ({ createCajero, sucursales, fetchSucursales }) => {
   const [cajero, setCajero] = useState(INITIAL_CAJERO);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
+  const [sucursalSelected, setSucursalSelected] = useState();
+
+  useEffect(() => {
+    fetchSucursales();
+  }, []);
 
   useEffect(() => {
     const formularioValido = Object.values(cajero).every((v) => Boolean(v));
 
-    setValido(formularioValido);
-  }, [cajero]);
+    setValido(formularioValido && sucursalSelected);
+  }, [cajero, sucursalSelected]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,7 +48,9 @@ const CajeroFormulario = ({ createCajero }) => {
     event.preventDefault();
 
     try {
-      await createCajero({ ...cajero });
+      await createCajero({ ...cajero, sucursal_id: sucursalSelected });
+
+      notyf.success("¡Cajero creado satisfactoriamente!");
 
       setSuccess(true);
     } catch (error) {
@@ -132,21 +140,27 @@ const CajeroFormulario = ({ createCajero }) => {
               >
                 <Select
                   showSearch
-                  style={{ width: 200 }}
+                  style={{ width: 250 }}
+                  name="sucursal"
+                  value={sucursalSelected}
+                  // value={sucursalSelected}
+                  onChange={(sucursal) => setSucursalSelected(sucursal)}
                   placeholder="Seleccione una sucursal"
                   optionFilterProp="children"
                   // onChange={onChange}
                 >
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="tom">Tom</Option>
+                  {sucursales &&
+                    sucursales.map((sucursal) => (
+                      <Option key={sucursal._id} value={sucursal._id}>
+                        {sucursal.nombre}
+                      </Option>
+                    ))}
                 </Select>
-                ,
               </Form.Item>
               {error && (
                 <div className="error-text">
                   <h3>
-                    <i class="fas fa-exclamation-circle"></i> Error
+                    <i className="fas fa-exclamation-circle"></i> Error
                   </h3>
                   <p>{error}</p>
                 </div>
@@ -162,4 +176,16 @@ const CajeroFormulario = ({ createCajero }) => {
   );
 };
 
-export default connect(null, { createCajero })(CajeroFormulario);
+CajeroFormulario.propTypes = {
+  sucursales: PropTypes.array.isRequired,
+  fetchSucursales: PropTypes.func.isRequired,
+  createCajero: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  sucursales: state.sucursales.sucursales,
+});
+
+export default connect(mapStateToProps, { createCajero, fetchSucursales })(
+  CajeroFormulario
+);

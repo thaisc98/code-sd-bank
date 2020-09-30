@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPerfil } from "../../state-mgmt/actions/perfil.actions";
 import { Form, Input, Button } from "antd";
+import notyf from "../../utils/notyf";
 
 const INITIAL_PERFIL = {
   rol: "",
@@ -43,6 +44,8 @@ const PerfilFormulario = ({ createPerfil }) => {
 
       await createPerfil({ ...perfil });
 
+      notyf.success("Perfil agregado satisfactoriamente.");
+
       setSuccess(true);
     } catch (error) {
       if (error.response.data.error) {
@@ -72,11 +75,11 @@ const PerfilFormulario = ({ createPerfil }) => {
               </Form.Item>
               <Form.Item
                 name={"descripcion"}
-                label="Descripcion"
+                label="Descripción"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Descripcion"
+                  placeholder="Descripción"
                   name="descripcion"
                   value={perfil.descripcion}
                   className="form-control"
