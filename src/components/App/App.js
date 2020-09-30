@@ -25,7 +25,7 @@ import InicioSesion from "../Auth/InicioSesion";
 
 import "notyf/notyf.min.css";
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <Router>
@@ -63,6 +63,6 @@ function App() {
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;

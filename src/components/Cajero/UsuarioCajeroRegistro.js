@@ -89,7 +89,7 @@ const UsuarioCajeroRegistro = ({
       ) : (
         <div className="container mt-4">
           <div className=" col-md-6">
-            <h4 className="mb-4">Registrarse</h4>
+            <h4 className="mb-4">Registrar cajero</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validationMessages}
