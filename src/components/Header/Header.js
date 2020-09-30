@@ -60,7 +60,7 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                   <Link to="/auth/inicio-sesion">Inciar sesión</Link>
                 </Menu.Item>
                 <Menu.Item key="7">
-                  <Link to="/auth/registro">Registro</Link>
+                  <Link to="/auth/registro">Registrarse</Link>
                 </Menu.Item>
               </>
             )}

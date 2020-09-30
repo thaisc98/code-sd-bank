@@ -47,7 +47,7 @@ const ClienteFormulario = ({ createCliente }) => {
   };
 
   const validateMessages = {
-    required: "${label} es obligatorio.",
+    required: "El campo ${label} es obligatorio.",
     types: {
       email: "${label} no es un email válido.",
       number: "${label} no es un número válido.",
@@ -100,8 +100,9 @@ const ClienteFormulario = ({ createCliente }) => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="402-XXX-XXXX"
+                  placeholder="Cédula"
                   name="cedula"
+                  maxLength="11"
                   value={cliente.cedula}
                   className="form-control"
                   onChange={handleChange}
@@ -123,7 +124,7 @@ const ClienteFormulario = ({ createCliente }) => {
               {error && (
                 <div className="error-text">
                   <h3>
-                    <i class="fas fa-exclamation-circle"></i> Error
+                    <i className="fas fa-exclamation-circle"></i> Error
                   </h3>
                   <p>{error}</p>
                 </div>
