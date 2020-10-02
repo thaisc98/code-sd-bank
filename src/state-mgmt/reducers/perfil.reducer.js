@@ -3,7 +3,7 @@ import {
   FETCH_PERFIL,
   CREATE_PERFIL,
   DELETE_PERFIL,
-} from "../types/perfil-types";
+} from "../types/perfil.types";
 
 const initialState = {
   perfiles: [],

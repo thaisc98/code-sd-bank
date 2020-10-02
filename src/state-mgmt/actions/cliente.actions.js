@@ -2,7 +2,7 @@ import {
   FETCH_CLIENTES,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
-} from "../types/cliente-types";
+} from "../types/cliente.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 

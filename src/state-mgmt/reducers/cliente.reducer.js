@@ -3,7 +3,7 @@ import {
   FETCH_CLIENTE,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
-} from "../types/cliente-types";
+} from "../types/cliente.types";
 
 const initialState = {
   clientes: [],

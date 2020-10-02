@@ -4,7 +4,7 @@ import {
   DELETE_PERFIL,
   UPDATE_PERFIL,
   FETCH_PERFIL,
-} from "../types/perfil-types";
+} from "../types/perfil.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 

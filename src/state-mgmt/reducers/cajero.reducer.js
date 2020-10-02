@@ -7,7 +7,7 @@ import {
   CREATE_CAJERO,
   DELETE_CAJERO,
   CREATE_CUENTA_CAJERO,
-} from "../types/cajero-types";
+} from "../types/cajero.types";
 
 const initialState = {
   cajeros: [],

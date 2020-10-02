@@ -1,12 +1,13 @@
 import { API_URL } from "../../utils/constants";
 import axios from "axios";
+
 import {
   REGISTRARSE,
   INICIAR_SESION,
   OBTENER_USUARIO_ACTUAL,
   OBTENER_ADMIN,
   CERRAR_SESION,
-} from "../types/auth-types";
+} from "../types/auth.types";
 
 export const fetchAdminByCedula = (cedula) => async (dispatch) => {
   const headers = {

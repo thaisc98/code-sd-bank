@@ -42,6 +42,11 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                 <Menu.Item key="11">
                   <Link to="/sucursales">Sucursales</Link>
                 </Menu.Item>
+                <Menu.Item key="12">
+                  <Link to="/tipos-de-transacciones">
+                    Tipos de transacciones
+                  </Link>
+                </Menu.Item>
                 <SubMenu
                   key="sub1"
                   icon={<UserOutlined />}

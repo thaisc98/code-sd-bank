@@ -4,7 +4,7 @@ import {
   REGISTRARSE,
   CERRAR_SESION,
   OBTENER_ADMIN,
-} from "../types/auth-types";
+} from "../types/auth.types";
 
 const initialState = {
   usuarioActual: JSON.parse(localStorage.getItem("usuarioActual")) || {},
