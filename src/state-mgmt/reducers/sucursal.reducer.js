@@ -4,7 +4,7 @@ import {
   UPDATE_SUCURSAL,
   CREATE_SUCURSAL,
   DELETE_SUCURSAL,
-} from "../types/sucursal-types";
+} from "../types/sucursal.types";
 
 const initialState = {
   sucursales: [],

@@ -7,7 +7,7 @@ import {
   UPDATE_CAJERO,
   DELETE_CAJERO,
   CREATE_CUENTA_CAJERO,
-} from "../types/cajero-types";
+} from "../types/cajero.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 

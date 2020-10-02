@@ -4,7 +4,7 @@ import {
   CREATE_SUCURSAL,
   UPDATE_SUCURSAL,
   DELETE_SUCURSAL,
-} from "../types/sucursal-types";
+} from "../types/sucursal.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 
