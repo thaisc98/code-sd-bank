@@ -114,7 +114,7 @@ const TipoDeTransaccionLista = ({
         style={createBtnStyles}
         onClick={() => setCreate(true)}
       >
-        Nuevo TipoDeTransaccion <i className="fas fa-plus-square ml-2"></i>
+        Nuevo tipo de transacción <i className="fas fa-plus-square ml-2"></i>
       </Button>
       {create && <Redirect to="/tipos-de-transacciones/crear"></Redirect>}
       <Table

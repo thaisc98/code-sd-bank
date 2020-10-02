@@ -24,6 +24,7 @@ import AuthRoute from "./AuthRoute";
 import PerfilFormulario from "../Perfil/PerfilFormulario";
 import TipoDeTransaccionAgregar from "../TipoDeTransaccion/TipoDeTransaccionAgregar";
 import TipoDeTransaccionActualizar from "../TipoDeTransaccion/TipoDeTransaccionActualizar";
+import CuentaLista from "../Cuenta/CuentaLista";
 import InicioSesion from "../Auth/InicioSesion";
 
 import "notyf/notyf.min.css";
@@ -76,6 +77,8 @@ const App = () => {
             path="/tipos-de-transacciones/:_id/editar"
             component={TipoDeTransaccionActualizar}
           />
+
+          <SecuredRoute path="/cuentas" component={CuentaLista} />
 
           <AuthRoute path="/auth/inicio-sesion" component={InicioSesion} />
           <AuthRoute path="/auth/registro" component={Registro} />

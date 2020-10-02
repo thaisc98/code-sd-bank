@@ -1,0 +1,3 @@
+export const FETCH_CUENTAS = "FETCH_CUENTAS";
+export const FETCH_CUENTA = "FETCH_CUENTA";
+export const CREATE_CUENTA = "CREATE_CUENTA";

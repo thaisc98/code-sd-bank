@@ -101,23 +101,14 @@ const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
     fontSize: "1.2rem",
   };
 
-  const titleStyles = {
-    textAlign: "center",
-    fontSize: "1.5rem",
-  };
-
-  const createBtnStyles = {
-    marginBottom: ".8rem",
-  };
-
   const { Content } = Layout;
 
   return (
     <Content className="container mt-4">
-      <h2 style={titleStyles}>Clientes</h2>
+      <h2 className="title-styles">Clientes</h2>
       <Button
         type="primary"
-        style={createBtnStyles}
+        className="create-btn-styles"
         onClick={() => setCreate(true)}
       >
         Nuevo Cliente <i className="fas fa-plus-square ml-2"></i>
