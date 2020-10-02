@@ -20,9 +20,6 @@ export const fetchTiposDeTransacciones = () => async (dispatch) => {
 export const fetchTipoDeTransaccionById = (_id) => async (dispatch) => {
   const { data } = await axios.get(`${API_URL}/tipo-de-transaccion/${_id}`);
 
-  console.log("ABCDEFGH");
-  console.log("data", data);
-
   dispatch({
     type: FETCH_TIPO_DE_TRANSACCION,
     payload: data,

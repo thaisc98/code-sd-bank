@@ -4,7 +4,8 @@ import perfilesReducer from "./perfil.reducer";
 import authReducer from "./auth.reducer";
 import cajeroReducer from "./cajero.reducer";
 import sucursalesReducer from "./sucursal.reducer";
-import tipoDeTransaccionReducer from "./tipo-de-transaccion.reducer.";
+import tipoDeTransaccionReducer from "./tipo-de-transaccion.reducer";
+import cuentaReducer from "./cuenta.reducer";
 
 export default combineReducers({
   tiposDeTransacciones: tipoDeTransaccionReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   clientes: clienteReducer,
   cajeros: cajeroReducer,
   sucursales: sucursalesReducer,
+  cuentas: cuentaReducer,
 });
