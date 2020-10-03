@@ -3,6 +3,7 @@ import {
   FETCH_CUENTA,
   CREATE_CUENTA,
   UPDATE_CUENTA,
+  DELETE_CUENTA,
 } from "../types/cuenta.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
