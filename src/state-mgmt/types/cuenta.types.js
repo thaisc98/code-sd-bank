@@ -1,3 +1,5 @@
 export const FETCH_CUENTAS = "FETCH_CUENTAS";
 export const FETCH_CUENTA = "FETCH_CUENTA";
 export const CREATE_CUENTA = "CREATE_CUENTA";
+export const UPDATE_CUENTA = "UPDATE_CUENTA";
+export const DELETE_CUENTA = "UPDATE_CUENTA";

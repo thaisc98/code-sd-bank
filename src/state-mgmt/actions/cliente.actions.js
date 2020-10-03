@@ -28,6 +28,23 @@ export const createCliente = (cliente) => async (dispatch) => {
   });
 };
 
+export const updateCliente = (_id, cliente) => async (dispatch) => {
+  const headers = {
+    "content-type": "application/json",
+  };
+
+  const { data } = await axios.put(
+    `${API_URL}/clientes/${_id}`,
+    cliente,
+    headers
+  );
+
+  dispatch({
+    type: UPDATE_CLIENTE,
+    payload: data,
+  });
+};
+
 export const deleteCliente = (_id) => async (dispatch) => {
   const headers = {
     "content-type": "application/json",
