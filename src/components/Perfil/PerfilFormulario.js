@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPerfil } from "../../state-mgmt/actions/perfil.actions";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Radio } from "antd";
 import notyf from "../../utils/notyf";
 
 const INITIAL_PERFIL = {
   rol: "",
   descripcion: "",
+  tipo_entidad_asociada: "",
 };
 
 const paddingclientes = {
@@ -86,6 +87,22 @@ const PerfilFormulario = ({ createPerfil }) => {
                   onChange={handleChange}
                 />
               </Form.Item>
+              <Form.Item
+                name={"tipo_entidad_asociada"}
+                label="EntidadAsociada"
+                rules={[{ required: true }]}
+              >
+                <Radio.Group
+                  onChange={handleChange}
+                  name="tipo_entidad_asociada"
+                  value={perfil.tipo_entidad_asociada}
+                >
+                  <Radio value={"Cliente"}>Cliente</Radio>
+                  <Radio value={"Cajero"}>Cajero</Radio>
+                  <Radio value={"Admin"}>Administrador</Radio>
+                </Radio.Group>
+              </Form.Item>
+
               {error && (
                 <div className="error-text">
                   <h3>

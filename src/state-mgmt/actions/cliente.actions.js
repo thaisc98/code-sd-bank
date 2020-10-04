@@ -1,5 +1,6 @@
 import {
   FETCH_CLIENTES,
+  FETCH_CLIENTE_BY_USUARIO_ID,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
 } from "../types/cliente.types";

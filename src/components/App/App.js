@@ -25,6 +25,9 @@ import PerfilFormulario from "../Perfil/PerfilFormulario";
 import TipoDeTransaccionAgregar from "../TipoDeTransaccion/TipoDeTransaccionAgregar";
 import TipoDeTransaccionActualizar from "../TipoDeTransaccion/TipoDeTransaccionActualizar";
 import CuentaLista from "../Cuenta/CuentaLista";
+import UsuariosLista from "../Usuario/UsuarioLista";
+import UsuarioDetalles from "../Usuario/UsuarioDetalles";
+import UsuarioCrear from "../Usuario/UsuarioCrear";
 import InicioSesion from "../Auth/InicioSesion";
 
 import "notyf/notyf.min.css";
@@ -79,6 +82,13 @@ const App = () => {
           />
 
           <SecuredRoute path="/cuentas" component={CuentaLista} />
+
+          <SecuredRoute path="/usuarios" component={UsuariosLista} />
+          <SecuredRoute path="/usuarios/crear" component={UsuarioCrear} />
+          <SecuredRoute
+            path="/usuarios/:_id/detalles"
+            component={UsuarioDetalles}
+          />
 
           <AuthRoute path="/auth/inicio-sesion" component={InicioSesion} />
           <AuthRoute path="/auth/registro" component={Registro} />

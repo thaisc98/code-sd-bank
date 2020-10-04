@@ -1,6 +1,7 @@
 import {
   FETCH_CLIENTES,
   FETCH_CLIENTE,
+  FETCH_CLIENTE_BY_USUARIO_ID,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
 } from "../types/cliente.types";
@@ -18,6 +19,11 @@ export default function (state = initialState, action) {
         clientes: action.payload,
       };
     case FETCH_CLIENTE:
+      return {
+        ...state,
+        cliente: action.payload,
+      };
+    case FETCH_CLIENTE_BY_USUARIO_ID:
       return {
         ...state,
         cliente: action.payload,

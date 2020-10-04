@@ -4,14 +4,14 @@ import rootReducer from "../reducers";
 
 const initialState = {};
 
-// const saveToLocalStorage = (state) => {
-//   try {
-//     const serializedState = JSON.stringify(state);
-//     localStorage.setItem("state", serializedState);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const saveToLocalStorage = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("state", serializedState);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const middleware = [thunk];
 
@@ -24,6 +24,6 @@ const store = createStore(
   )
 );
 
-// store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export default store;
