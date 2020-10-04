@@ -50,6 +50,9 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                     Tipos de transacciones
                   </Link>
                 </Menu.Item>
+                <Menu.Item key="14">
+                  <Link to="/usuarios">Usuarios</Link>
+                </Menu.Item>
                 <SubMenu
                   key="sub1"
                   icon={<UserOutlined />}

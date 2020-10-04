@@ -4,36 +4,32 @@ import { Redirect } from "react-router-dom";
 import { Table, Button } from "antd";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
 import {
-  deleteCajero,
-  fetchCajeros,
-} from "../../state-mgmt/actions/cajero.actions";
+  fetchUsuarios,
+  deleteUsuario,
+} from "../../state-mgmt/actions/usuario.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
-import { Link } from "react-router-dom";
-
 import notyf from "../../utils/notyf";
+import { Link } from "react-router-dom";
 import alertify from "alertifyjs";
 
-const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
+const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
   const [create, setCreate] = useState(false);
 
   useEffect(() => {
-    fetchCajeros();
+    fetchUsuarios();
   }, []);
 
   const columns = [
     {
-      title: "Cédula",
-      dataIndex: "cedula",
+      title: "Correo electrónico",
+      dataIndex: "email",
     },
     {
-      title: "Nombre",
-      dataIndex: "nombre",
-    },
-    {
-      title: "Apellido",
-      dataIndex: "apellido",
+      title: "Tipo de entidad asociada",
+      dataIndex: "tipo_entidad_asociada",
     },
     {
       title: "Fecha de creación",
@@ -46,14 +42,14 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
     {
       title: "Operación",
       key: "operacion",
-      render: (_, cajero) => (
+      render: (_, usuario) => (
         <span>
-          <Link to={`/cajeros/${cajero._id}/detalles`}>
+          <Link to={`/usuarios/${usuario._id}/detalles`}>
             <i className="fas fa-eye details-i-styles"></i>
           </Link>
           <i className="edit-i-styles far fa-edit"></i>
           <i
-            onClick={(event) => onDeleteCajero(cajero.key, event)}
+            onClick={(event) => onDeleteUsuario(usuario, event)}
             className="delete-i-styles fas fa-trash-alt"
           ></i>
         </span>
@@ -61,17 +57,19 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
     },
   ];
 
-  const onDeleteCajero = (_id, event) => {
+  const onDeleteUsuario = (usuario, event) => {
     event.preventDefault();
+
+    const { _id, tipo_entidad_asociada } = usuario;
 
     alertify.confirm(
       "Confirmar eliminación",
-      "¿Seguro que desea eliminar a este cajero?",
+      "¿Seguro que desea eliminar a este usuario?",
       async () => {
         try {
-          await deleteCajero(_id);
+          await deleteUsuario(_id, tipo_entidad_asociada);
 
-          notyf.success("Cajero eliminado satisfactoriamente.");
+          notyf.success("Usuario eliminado satisfactoriamente.");
         } catch (error) {
           notyf.error(error.response.data.error);
         }
@@ -81,36 +79,27 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
   };
 
   const dataMapped =
-    cajeros &&
-    cajeros.map((cajero) => ({
-      ...cajero,
-      createdAt: getReadibleDate(cajero.createdAt),
-      updatedAt: getReadibleDate(cajero.updatedAt),
-      key: cajero._id,
+    usuarios &&
+    usuarios.map((usuario) => ({
+      ...usuario,
+      createdAt: getReadibleDate(usuario.createdAt),
+      updatedAt: getReadibleDate(usuario.updatedAt),
+      key: usuario._id,
     }));
-
-  const titleStyles = {
-    textAlign: "center",
-    fontSize: "1.5rem",
-  };
-
-  const createBtnStyles = {
-    marginBottom: ".8rem",
-  };
 
   const { Content } = Layout;
 
   return (
     <Content className="container mt-4">
-      <h2 style={titleStyles}>Cajeros</h2>
+      <h2 className="title-styles">Usuarios</h2>
       <Button
         type="primary"
-        style={createBtnStyles}
+        className="create-btn-styles"
         onClick={() => setCreate(true)}
       >
-        Nuevo Cajero <i className="fas fa-plus-square ml-2"></i>
+        Nueva Usuario <i className="fas fa-plus-square ml-2"></i>
       </Button>
-      {create && <Redirect to="/cajeros/crear"></Redirect>}
+      {create && <Redirect to="/usuarios/crear"></Redirect>}
       <Table
         className="ant-table"
         columns={columns}
@@ -121,16 +110,16 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
   );
 };
 
-CajeroLista.prototypes = {
-  fetchCajeros: PropTypes.func.isRequired,
-  cajeros: PropTypes.array.isRequired,
-  // deleteCajero: PropTypes.func.isRequired,
+UsuarioLista.propTypes = {
+  fetchUsuarios: PropTypes.func.isRequired,
+  usuarios: PropTypes.array.isRequired,
+  deleteUsuario: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  cajeros: state.cajeros.cajeros,
+  usuarios: state.usuarios.usuarios,
 });
 
-export default connect(mapStateToProps, { fetchCajeros, deleteCajero })(
-  CajeroLista
+export default connect(mapStateToProps, { deleteUsuario, fetchUsuarios })(
+  UsuarioLista
 );

@@ -143,11 +143,9 @@ const CajeroFormulario = ({ createCajero, sucursales, fetchSucursales }) => {
                   style={{ width: 250 }}
                   name="sucursal"
                   value={sucursalSelected}
-                  // value={sucursalSelected}
                   onChange={(sucursal) => setSucursalSelected(sucursal)}
                   placeholder="Seleccione una sucursal"
                   optionFilterProp="children"
-                  // onChange={onChange}
                 >
                   {sucursales &&
                     sucursales.map((sucursal) => (

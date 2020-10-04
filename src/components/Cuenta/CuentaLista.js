@@ -41,7 +41,7 @@ const CuentaLista = ({ fetchCuentas, cuentas }) => {
       key: "operacion",
       render: (_, cuenta) => (
         <span>
-          <i className="fas fa-eye edit-i-styles"></i>
+          <i className="fas fa-eye details-i-styles"></i>
         </span>
       ),
     },
