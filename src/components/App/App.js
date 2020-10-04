@@ -27,8 +27,12 @@ import TipoDeTransaccionActualizar from "../TipoDeTransaccion/TipoDeTransaccionA
 import CuentaLista from "../Cuenta/CuentaLista";
 import InicioSesion from "../Auth/InicioSesion";
 import ClienteActualizar from "../Cliente/ClienteActualizar";
+import PrestamoLista from "../Prestamo/PrestamoLista";
+import PrestamoFormulario from "../Prestamo/PrestamoFormulario";
+import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
 
 import "notyf/notyf.min.css";
+
 
 const App = () => {
   return (
@@ -84,6 +88,13 @@ const App = () => {
           />
 
           <SecuredRoute path="/cuentas" component={CuentaLista} />
+
+          <SecuredRoute path="/prestamos" component={PrestamoLista} />
+          <SecuredRoute path="/prestamos/crear" component={PrestamoFormulario} />
+          <SecuredRoute
+            path="/prestamos/:_id/editar"
+            component={PrestamoActualizar}
+          />
 
           <AuthRoute path="/auth/inicio-sesion" component={InicioSesion} />
           <AuthRoute path="/auth/registro" component={Registro} />

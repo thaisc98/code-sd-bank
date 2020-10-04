@@ -1,45 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createCliente } from "../../state-mgmt/actions/cliente.actions";
+import { createPrestamo } from "../../state-mgmt/actions/prestamo.actions";
 import { Form, Input, Button } from "antd";
 
 const INITIAL_CLIENTE = {
-  
-  cedula: "",
-  nombre: "",
-  apellido: "",
-  sexo: "",
+  descripcion: "",
+  cantidad_total: "",
+  cliente: "",
 };
 
 const paddingClientes = {
   padding: "50px",
 };
 
-const ClienteFormulario = ({ createCliente }) => {
-  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+const PrestamoFormulario = ({ createPrestamo }) => {
+  const [prestamo, setPrestamo] = useState(INITIAL_CLIENTE);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
 
   useEffect(() => {
-    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+    const formularioValido = Object.values(prestamo).every((v) => Boolean(v));
 
     setValido(formularioValido);
-  }, [cliente]);
+  }, [prestamo]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setError(undefined);
-    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    setPrestamo((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("prestamo", prestamo);
     try {
-      await createCliente({ ...cliente });
+      await createPrestamo({ ...prestamo });
 
       setSuccess(true);
     } catch (error) {
@@ -61,63 +59,49 @@ const ClienteFormulario = ({ createCliente }) => {
   return (
     <div className="container mt-4">
       <div className="row " style={paddingClientes}>
-        {success && <Redirect to="/clientes"></Redirect>}
+        {success && <Redirect to="/prestamos"></Redirect>}
         <div>
           <div>
-            <h4>Crear cliente</h4>
+            <h4>Crear prestamo</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
             >
               <Form.Item
-                name={"nombre"}
-                label="Nombre"
+                name={"descripcion"}
+                label="Descripcion"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Nombre"
-                  name="nombre"
-                  value={cliente.nombre}
+                  placeholder="Descripcion"
+                  name="descripcion"
+                  value={prestamo.descripcion}
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item
-                name={"apellido"}
-                label="Apellido"
+                name={"cantidad_total"}
+                label="Cantidad Total"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Apellido"
-                  name="apellido"
-                  value={cliente.apellido}
+                  placeholder="Cantidad Total"
+                  name="cantidad_total"
+                  value={prestamo.cantidad_total}
                   className="form-control"
                   onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item
-                name={"cedula"}
-                label="Cedula"
+                name={"cliente"}
+                label="Cliente"
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Cédula"
-                  name="cedula"
-                  maxLength="11"
-                  value={cliente.cedula}
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </Form.Item>
-              <Form.Item
-                name={"sexo"}
-                label="Sexo"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  placeholder="Femenino o Masculino"
-                  value={cliente.sexo}
-                  name="sexo"
+                  placeholder="Cliente Id"
+                  name="cliente"
+                  value={prestamo.cliente}
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -141,4 +125,4 @@ const ClienteFormulario = ({ createCliente }) => {
   );
 };
 
-export default connect(null, { createCliente })(ClienteFormulario);
+export default connect(null, { createPrestamo })(PrestamoFormulario);

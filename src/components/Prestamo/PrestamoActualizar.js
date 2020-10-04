@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  updateCliente,
-  fetchClienteById,
-} from "../../state-mgmt/actions/cliente.actions";
+  updatePrestamo,
+  fetchPrestamoByClienteId,
+} from "../../state-mgmt/actions/prestamo.actions";
 import { Form, Input, Button } from "antd";
 import notyf from "../../utils/notyf";
 
@@ -12,22 +12,19 @@ const paddingCliente = {
   padding: "50px",
 };
 
-const ClienteActualizar = ({
+const PrestamoActualizar = ({
   match,
-  updateCliente,
-  clienteActual,
-  fetchClienteById,
+  updatePrestamo,
+  prestamoActual,
+  fetchPrestamoByClienteId,
 }) => {
-  const [cliente, setCliente] = useState({
-    nombre: "",
-    apellido: "",
-    cedula: "",
-    sexo: "",
+  const [prestamo, setPrestamo] = useState({
+    descripcion: "",
   });
 
   useEffect(() => {
     console.log(match.params._id);
-    fetchClienteById(match.params._id);
+    fetchPrestamoByClienteId(match.params._id);
   }, []);
 
   const [error, setError] = useState("");
@@ -37,36 +34,33 @@ const ClienteActualizar = ({
   useEffect(() => {
     const clienteId = match.params._id;
 
-    fetchClienteById(clienteId).then(() =>
-      setCliente({
-        nombre: clienteActual.nombre,
-        apellido: clienteActual.apellido,
-        cedula: clienteActual.cedula,
-        sexo: clienteActual.sexo,
+    fetchPrestamoByClienteId(clienteId).then(() =>
+      setPrestamo({
+        descripcion: prestamoActual.descripcion,
       })
     );
   }, []);
 
   useEffect(() => {
-    const formularioValido = Object.values(cliente).every((v) => Boolean(v));
+    const formularioValido = Object.values(prestamo).every((v) => Boolean(v));
 
     setValido(formularioValido);
-  }, [cliente]);
+  }, [prestamo]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setError(undefined);
-    setCliente((prevState) => ({ ...prevState, [name]: value }));
+    setPrestamo((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await updateCliente(match.params._id, { ...cliente });
+      await updatePrestamo(match.params._id, { ...prestamo });
 
-      notyf.success("Cliente actualizado satisfactoriamente.");
+      notyf.success("Prestamo actualizado satisfactoriamente.");
       setSuccess(true);
     } catch (error) {
       notyf.error(error.response.data.error);
@@ -87,36 +81,23 @@ const ClienteActualizar = ({
   return (
     <div className="container mt-4">
       <div className="row " style={paddingCliente}>
-        {success && <Redirect to="/clientes"></Redirect>}
-        {clienteActual && (
+        {success && <Redirect to="/prestamos"></Redirect>}
+        {prestamoActual && (
           <div>
-            <h4>Actualizar el cliente</h4>
+            <h4>Actualizar el prestamo</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
             >
               <Form.Item
-                name={"nombre"}
+                name={"descripcion"}
                 label="Nombre"
                 rules={[{ required: true }]}
               >
                 <Input
-                  value={cliente.nombre}
-                  placeholder={clienteActual.nombre}
+                  value={prestamoActual.descripcion}
+                  placeholder={prestamoActual.descripcion}
                   name="nombre"
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </Form.Item>
-              <Form.Item
-                name={"apellido"}
-                label="Apellido"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  value={cliente.apellido}
-                  placeholder={clienteActual.apellido}
-                  name="Apellido"
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -141,10 +122,10 @@ const ClienteActualizar = ({
 };
 
 const mapStateToProps = (state) => ({
-  clienteActual: state.clientes.clienteActual,
+  prestamoActual: state.prestamos.prestamoActual,
 });
 
 export default connect(mapStateToProps, {
-  updateCliente,
-  fetchClienteById,
-})(ClienteActualizar);
+  updatePrestamo,
+  fetchPrestamoByClienteId,
+})(PrestamoActualizar);
