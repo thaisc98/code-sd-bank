@@ -26,6 +26,7 @@ import TipoDeTransaccionAgregar from "../TipoDeTransaccion/TipoDeTransaccionAgre
 import TipoDeTransaccionActualizar from "../TipoDeTransaccion/TipoDeTransaccionActualizar";
 import CuentaLista from "../Cuenta/CuentaLista";
 import InicioSesion from "../Auth/InicioSesion";
+import ClienteActualizar from "../Cliente/ClienteActualizar";
 
 import "notyf/notyf.min.css";
 
@@ -40,6 +41,10 @@ const App = () => {
 
           <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
           <SecuredRoute path="/clientes" component={ClienteLista} />
+          <SecuredRoute
+            path="/clientes/:_id/editar"
+            component={ClienteActualizar}
+          />
 
           <SecuredRoute
             path="/sucursales/crear"

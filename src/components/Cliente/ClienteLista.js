@@ -10,9 +10,9 @@ import {
 } from "../../state-mgmt/actions/cliente.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
-
 import notyf from "../../utils/notyf";
 import alertify from "alertifyjs";
+import { Link } from "react-router-dom";
 
 const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
   const [create, setCreate] = useState(false);
@@ -51,7 +51,9 @@ const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
       key: "operacion",
       render: (_, cliente) => (
         <span>
-          <i style={editIStyles} className="far fa-edit"></i>
+          <Link to={`clientes/${cliente._id}/editar`}>
+            <i style={editIStyles} className="far fa-edit"></i>
+          </Link>
           <i
             onClick={(event) => onDeleteCliente(cliente.key, event)}
             style={deleteIStyles}

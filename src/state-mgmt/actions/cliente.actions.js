@@ -1,5 +1,6 @@
 import {
   FETCH_CLIENTES,
+  FETCH_CLIENTE,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
   UPDATE_CLIENTE,
@@ -12,6 +13,15 @@ export const fetchClientes = () => async (dispatch) => {
 
   dispatch({
     type: FETCH_CLIENTES,
+    payload: data,
+  });
+};
+
+export const fetchClienteById = (_id) => async (dispatch) => {
+  const { data } = await axios.get(`${API_URL}/clientes/${_id}`);
+
+  dispatch({
+    type: FETCH_CLIENTE,
     payload: data,
   });
 };
