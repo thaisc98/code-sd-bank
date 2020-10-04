@@ -30,6 +30,11 @@ const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
       key: "descripcion",
     },
     {
+      title: "Entidad asociada",
+      dataIndex: "tipo_entidad_asociada",
+      key: "descripcion",
+    },
+    {
       title: "Creado en",
       dataIndex: "created_at",
       key: "created_at",
