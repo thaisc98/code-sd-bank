@@ -55,6 +55,9 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                     Prestamos
                   </Link>
                 </Menu.Item>
+                <Menu.Item key="15">
+                  <Link to="/usuarios">Usuarios</Link>
+                </Menu.Item>
                 <SubMenu
                   key="sub1"
                   icon={<UserOutlined />}

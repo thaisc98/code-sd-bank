@@ -6,6 +6,7 @@ import {
   fetchUsuarioCajero,
 } from "../../state-mgmt/actions/cajero.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
+import { Button } from "antd";
 import { Link } from "react-router-dom";
 
 const CajeroDetalles = ({
@@ -36,6 +37,12 @@ const CajeroDetalles = ({
 
   return (
     <div className="container mt-4">
+      <Link to="/cajeros">
+        <Button className="mb-4" type="primary">
+          <i className="fas fa-arrow-left"></i>
+        </Button>
+      </Link>
+
       <h2>Detalles del cajero</h2>
       {cajero && (
         <div>

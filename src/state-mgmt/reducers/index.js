@@ -7,6 +7,8 @@ import sucursalesReducer from "./sucursal.reducer";
 import tipoDeTransaccionReducer from "./tipo-de-transaccion.reducer";
 import cuentaReducer from "./cuenta.reducer";
 import prestamoReducer from "./prestamo.reducer"
+import usuarioReducer from "./usuario.reducer";
+
 
 export default combineReducers({
   tiposDeTransacciones: tipoDeTransaccionReducer,
@@ -16,5 +18,6 @@ export default combineReducers({
   cajeros: cajeroReducer,
   sucursales: sucursalesReducer,
   cuentas: cuentaReducer,
-  prestamos: prestamoReducer
+  prestamos: prestamoReducer,
+  usuarios: usuarioReducer,
 });
