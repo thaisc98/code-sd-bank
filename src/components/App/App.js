@@ -33,8 +33,9 @@ import ClienteActualizar from "../Cliente/ClienteActualizar";
 import PrestamoLista from "../Prestamo/PrestamoLista";
 import PrestamoFormulario from "../Prestamo/PrestamoFormulario";
 import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
-
+import CuentaFormulario from "../Cuenta/CuentaFormulario";
 import "notyf/notyf.min.css";
+import ClienteDetails from "../Cliente/ClienteDetails";
 
 const App = () => {
   return (
@@ -50,6 +51,11 @@ const App = () => {
           <SecuredRoute
             path="/clientes/:_id/editar"
             component={ClienteActualizar}
+          />
+
+          <SecuredRoute
+            path="/clientes/:_id/detalles"
+            component={ClienteDetails}
           />
 
           <SecuredRoute
@@ -90,6 +96,7 @@ const App = () => {
           />
 
           <SecuredRoute path="/cuentas" component={CuentaLista} />
+          <SecuredRoute path="/cuentas/crear" component={CuentaFormulario} />
 
           <SecuredRoute path="/prestamos" component={PrestamoLista} />
           <SecuredRoute

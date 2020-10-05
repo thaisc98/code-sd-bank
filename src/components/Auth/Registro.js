@@ -151,7 +151,7 @@ const Registro = ({ registrarse, admin, fetchAdminByCedula }) => {
                 label="Contraseña"
                 rules={[{ required: true }]}
               >
-                <Input
+                <Input.Password
                   placeholder="Contraseña"
                   name="contrasenia"
                   value={usuario.contrasenia}
@@ -165,7 +165,7 @@ const Registro = ({ registrarse, admin, fetchAdminByCedula }) => {
                 label="Confirmación de contraseña"
                 rules={[{ required: true }]}
               >
-                <Input
+                <Input.Password
                   placeholder="Confirme su contraseña"
                   value={usuario.confirmacionContrasenia}
                   name="confirmacionContrasenia"

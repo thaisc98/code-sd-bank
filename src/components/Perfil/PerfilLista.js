@@ -10,6 +10,8 @@ import { getReadibleDate } from "../../utils/date-formatter";
 import { connect } from "react-redux";
 import notyf from "../../utils/notyf";
 import alertify from "alertifyjs";
+import { Link } from "react-router-dom";
+import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
   const [createPerfil, setCreatePerfil] = useState(false);
@@ -49,12 +51,21 @@ const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
       key: "operacion",
       render: (_, perfil) => (
         <span>
-          <i style={editIStyles} className="far fa-edit"></i>
-          <i
+          <Link to={`/perfil/${perfil._id}/detalles`}>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
+          </Link>
+          <Link to={`perfil/${perfil._id}/editar`}>
+            <EditOutlined style={editIStyles} />
+          </Link>
+          <DeleteOutlined
             onClick={(event) => onDeletePerfil(perfil.key, event)}
             style={deleteIStyles}
-            className="fas fa-trash-alt"
-          ></i>
+          />
         </span>
       ),
     },

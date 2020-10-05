@@ -11,6 +11,7 @@ import {
   fetchTiposDeTransacciones,
   deleteTipoDeTransaccion,
 } from "../../state-mgmt/actions/tipo-de-transaccion.actions";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const TipoDeTransaccionLista = ({
   fetchTiposDeTransacciones,
@@ -42,15 +43,14 @@ const TipoDeTransaccionLista = ({
       render: (_, tipoDeTransaccion) => (
         <span>
           <Link to={`tipos-de-transacciones/${tipoDeTransaccion._id}/editar`}>
-            <i style={editIStyles} className="far fa-edit"></i>
+            <EditOutlined style={editIStyles} />
           </Link>
-          <i
+          <DeleteOutlined
             onClick={(event) =>
               onDeleteTipoDeTransaccion(tipoDeTransaccion.key, event)
             }
             style={deleteIStyles}
-            className="fas fa-trash-alt"
-          ></i>
+          />
         </span>
       ),
     },

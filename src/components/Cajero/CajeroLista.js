@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 import notyf from "../../utils/notyf";
 import alertify from "alertifyjs";
+import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
   const [create, setCreate] = useState(false);
@@ -21,6 +22,17 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
   useEffect(() => {
     fetchCajeros();
   }, []);
+
+  const editIStyles = {
+    color: "#48db27",
+    fontSize: "1.3rem",
+    marginRight: "20px",
+  };
+
+  const deleteIStyles = {
+    color: "#f52d1b",
+    fontSize: "1.3rem",
+  };
 
   const columns = [
     {
@@ -46,16 +58,24 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
     {
       title: "Operación",
       key: "operacion",
+
       render: (_, cajero) => (
         <span>
           <Link to={`/cajeros/${cajero._id}/detalles`}>
-            <i className="fas fa-eye details-i-styles"></i>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
           </Link>
-          <i className="edit-i-styles far fa-edit"></i>
-          <i
+          <Link to={`cajeros/${cajero._id}/editar`}>
+            <EditOutlined style={editIStyles} />
+          </Link>
+          <DeleteOutlined
             onClick={(event) => onDeleteCajero(cajero.key, event)}
-            className="delete-i-styles fas fa-trash-alt"
-          ></i>
+            style={deleteIStyles}
+          />
         </span>
       ),
     },
@@ -124,7 +144,6 @@ const CajeroLista = ({ fetchCajeros, cajeros, deleteCajero }) => {
 CajeroLista.prototypes = {
   fetchCajeros: PropTypes.func.isRequired,
   cajeros: PropTypes.array.isRequired,
-  // deleteCajero: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

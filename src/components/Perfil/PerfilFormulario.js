@@ -63,7 +63,7 @@ const PerfilFormulario = ({ createPerfil }) => {
         {success && <Redirect to="/perfiles"></Redirect>}
         <div>
           <div>
-            <h4>Crear Perfil</h4>
+            <h4>Crear perfil</h4>
             <Form onSubmitCapture={handleSubmit}>
               <Form.Item name={"rol"} label="Rol" rules={[{ required: true }]}>
                 <Input

@@ -14,6 +14,7 @@ import { Layout } from "antd";
 import notyf from "../../utils/notyf";
 import { Link } from "react-router-dom";
 import alertify from "alertifyjs";
+import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
   const [create, setCreate] = useState(false);
@@ -21,6 +22,17 @@ const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
   useEffect(() => {
     fetchUsuarios();
   }, []);
+
+  const editIStyles = {
+    color: "#48db27",
+    fontSize: "1.3rem",
+    marginRight: "20px",
+  };
+
+  const deleteIStyles = {
+    color: "#f52d1b",
+    fontSize: "1.3rem",
+  };
 
   const columns = [
     {
@@ -45,13 +57,20 @@ const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
       render: (_, usuario) => (
         <span>
           <Link to={`/usuarios/${usuario._id}/detalles`}>
-            <i className="fas fa-eye details-i-styles"></i>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
           </Link>
-          <i className="edit-i-styles far fa-edit"></i>
-          <i
+          <Link to={`usuarios/${usuario._id}/editar`}>
+            <EditOutlined style={editIStyles} />
+          </Link>
+          <DeleteOutlined
             onClick={(event) => onDeleteUsuario(usuario, event)}
-            className="delete-i-styles fas fa-trash-alt"
-          ></i>
+            style={deleteIStyles}
+          />
         </span>
       ),
     },

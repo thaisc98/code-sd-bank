@@ -6,6 +6,8 @@ import { fetchCuentas } from "../../state-mgmt/actions/cuenta.actions";
 import { Table, Button } from "antd";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const CuentaLista = ({ fetchCuentas, cuentas }) => {
   const [create, setCreate] = useState(false);
@@ -20,7 +22,7 @@ const CuentaLista = ({ fetchCuentas, cuentas }) => {
       dataIndex: "numero_de_cuenta",
     },
     {
-      title: "Balanace disponible",
+      title: "Balance disponible",
       dataIndex: "balance_disponible",
     },
     {
@@ -41,7 +43,14 @@ const CuentaLista = ({ fetchCuentas, cuentas }) => {
       key: "operacion",
       render: (_, cuenta) => (
         <span>
-          <i className="fas fa-eye details-i-styles"></i>
+          <Link to={`/cuenta/${cuenta._id}/detalles`}>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
+          </Link>
         </span>
       ),
     },

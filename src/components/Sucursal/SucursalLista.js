@@ -13,6 +13,8 @@ import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
 import notyf from "../../utils/notyf";
 import alertify from "alertifyjs";
+import { Link } from "react-router-dom";
+import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
   const [create, setCreate] = useState(false);
@@ -47,12 +49,21 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
       key: "operacion",
       render: (_, sucursal) => (
         <span>
-          <i style={editIStyles} className="far fa-edit"></i>
-          <i
+          <Link to={`/sucursales/${sucursal._id}/detalles`}>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "10px",
+              }}
+            />
+          </Link>
+          <Link to={`sucursales/${sucursal._id}/editar`}>
+            <EditOutlined style={editIStyles} />
+          </Link>
+          <DeleteOutlined
             onClick={(event) => onDeleteSucursal(sucursal.key, event)}
             style={deleteIStyles}
-            className="fas fa-trash-alt"
-          ></i>
+          />
         </span>
       ),
     },
@@ -90,12 +101,13 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
   const editIStyles = {
     color: "#48db27",
     fontSize: "1.2rem",
-    marginRight: "20px",
+    marginRight: "10px",
   };
 
   const deleteIStyles = {
     color: "#f52d1b",
     fontSize: "1.2rem",
+    marginRight: "10px",
   };
 
   const titleStyles = {

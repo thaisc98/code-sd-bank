@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { fetchPrestamos } from "../../state-mgmt/actions/prestamo.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+
 import { Link } from "react-router-dom";
 
 const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
@@ -50,7 +52,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       render: (_, prestamo) => (
         <span>
           <Link to={`prestamo/${prestamo._id}/editar`}>
-            <i style={editIStyles} className="far fa-edit"></i>
+            <EditOutlined style={editIStyles} />
           </Link>
         </span>
       ),

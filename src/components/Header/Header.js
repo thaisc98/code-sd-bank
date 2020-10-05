@@ -51,9 +51,7 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="14">
-                  <Link to="/prestamos">
-                    Prestamos
-                  </Link>
+                  <Link to="/prestamos">Préstamos</Link>
                 </Menu.Item>
                 <Menu.Item key="15">
                   <Link to="/usuarios">Usuarios</Link>
@@ -73,7 +71,7 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
             {!usuarioActual.email && (
               <>
                 <Menu.Item key="8">
-                  <Link to="/auth/inicio-sesion">Inciar sesión</Link>
+                  <Link to="/auth/inicio-sesion">Iniciar sesión</Link>
                 </Menu.Item>
                 <Menu.Item key="7">
                   <Link to="/auth/registro">Registrarse</Link>

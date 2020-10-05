@@ -89,7 +89,7 @@ const InicioSesion = ({ iniciarSesion }) => {
                 label="Contraseña"
                 rules={[{ required: true }]}
               >
-                <Input
+                <Input.Password
                   placeholder="Contraseña"
                   name="contrasenia"
                   value={usuario.contrasenia}
