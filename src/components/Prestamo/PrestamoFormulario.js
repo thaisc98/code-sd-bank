@@ -2,33 +2,38 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPrestamo } from "../../state-mgmt/actions/prestamo.actions";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Select } from "antd";
+import { fetchClientes } from "../../state-mgmt/actions/cliente.actions";
+import notyf from "../../utils/notyf";
 
 const INITIAL_CLIENTE = {
   descripcion: "",
   cantidad_total: "",
-  cliente: "",
 };
 
 const paddingClientes = {
   padding: "50px",
 };
 
-const PrestamoFormulario = ({ createPrestamo }) => {
+const PrestamoFormulario = ({ createPrestamo, clientes, fetchClientes }) => {
   const [prestamo, setPrestamo] = useState(INITIAL_CLIENTE);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
+  const [clienteSelected, setClienteSelected] = useState();
+
+  useEffect(() => {
+    fetchClientes();
+  }, []);
 
   useEffect(() => {
     const formularioValido = Object.values(prestamo).every((v) => Boolean(v));
 
-    setValido(formularioValido);
-  }, [prestamo]);
+    setValido(formularioValido && clienteSelected);
+  }, [prestamo, clienteSelected]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setError(undefined);
     setPrestamo((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -36,9 +41,11 @@ const PrestamoFormulario = ({ createPrestamo }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("prestamo", prestamo);
-    try {
-      await createPrestamo({ ...prestamo });
 
+    try {
+      await createPrestamo({ ...prestamo, cliente_id: clienteSelected });
+
+      notyf.success("¡Prestamo creado satisfactoriamente!");
       setSuccess(true);
     } catch (error) {
       setError(error.response.data.error);
@@ -62,7 +69,7 @@ const PrestamoFormulario = ({ createPrestamo }) => {
         {success && <Redirect to="/prestamos"></Redirect>}
         <div>
           <div>
-            <h4>Crear prestamo</h4>
+            <h4>Crear préstamo</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
@@ -98,13 +105,22 @@ const PrestamoFormulario = ({ createPrestamo }) => {
                 label="Cliente"
                 rules={[{ required: true }]}
               >
-                <Input
-                  placeholder="Cliente Id"
+                <Select
+                  showSearch
+                  style={{ width: 250 }}
                   name="cliente"
-                  value={prestamo.cliente}
-                  className="form-control"
-                  onChange={handleChange}
-                />
+                  value={clienteSelected}
+                  onChange={(cliente) => setClienteSelected(cliente)}
+                  placeholder="Seleccione el cliente"
+                  optionFilterProp="children"
+                >
+                  {clientes &&
+                    clientes.map((cliente) => (
+                      <Select.Option key={cliente._id} value={cliente._id}>
+                        {cliente.nombre} {cliente.apellido}
+                      </Select.Option>
+                    ))}
+                </Select>
               </Form.Item>
               {error && (
                 <div className="error-text">
@@ -125,4 +141,10 @@ const PrestamoFormulario = ({ createPrestamo }) => {
   );
 };
 
-export default connect(null, { createPrestamo })(PrestamoFormulario);
+const mapStateToProps = (state) => ({
+  clientes: state.clientes.clientes,
+});
+
+export default connect(mapStateToProps, { createPrestamo, fetchClientes })(
+  PrestamoFormulario
+);

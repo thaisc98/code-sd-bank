@@ -176,12 +176,6 @@ const CajeroFormulario = ({ createCajero, sucursales, fetchSucursales }) => {
   );
 };
 
-CajeroFormulario.propTypes = {
-  sucursales: PropTypes.array.isRequired,
-  fetchSucursales: PropTypes.func.isRequired,
-  createCajero: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   sucursales: state.sucursales.sucursales,
 });

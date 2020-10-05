@@ -24,9 +24,9 @@ const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
   const columns = [
     {
       title: "ID",
-      dataIndex:"_id",
+      dataIndex: "_id",
     },
-    
+
     {
       title: "Nombre",
       dataIndex: "nombre",

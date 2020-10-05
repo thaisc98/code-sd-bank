@@ -3,8 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Table, Button } from "antd";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-    fetchPrestamos} from "../../state-mgmt/actions/prestamo.actions";
+import { fetchPrestamos } from "../../state-mgmt/actions/prestamo.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
 import { Link } from "react-router-dom";
@@ -26,7 +25,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       dataIndex: "cantidad_restante",
     },
     {
-      title: "Descripcion",
+      title: "Descripción",
       dataIndex: "descripcion",
     },
     {
@@ -34,8 +33,8 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       dataIndex: "cantidad_total",
     },
     {
-        title: "Cliente Id",
-        dataIndex: "cliente",
+      title: "Cliente",
+      dataIndex: "cliente",
     },
     {
       title: "Fecha de Registro",
@@ -83,7 +82,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
         className="create-btn-styles"
         onClick={() => setCreate(true)}
       >
-        Nuevo Prestamo <i className="fas fa-plus-square ml-2"></i>
+        Nuevo Préstamo <i className="fas fa-plus-square ml-2"></i>
       </Button>
       {create && <Redirect to="/prestamos/crear"></Redirect>}
       <Table
@@ -105,6 +104,4 @@ const mapStateToProps = (state) => ({
   prestamos: state.prestamos.prestamos,
 });
 
-export default connect(mapStateToProps, { fetchPrestamos })(
-    PrestamoLista
-);
+export default connect(mapStateToProps, { fetchPrestamos })(PrestamoLista);
