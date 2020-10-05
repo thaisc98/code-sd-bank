@@ -1,26 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { createCliente } from "../../state-mgmt/actions/cliente.actions";
+import {
+  updateCliente,
+  fetchClienteById,
+} from "../../state-mgmt/actions/cliente.actions";
 import { Form, Input, Button } from "antd";
+import notyf from "../../utils/notyf";
 
-const INITIAL_CLIENTE = {
-  
-  cedula: "",
-  nombre: "",
-  apellido: "",
-  sexo: "",
-};
-
-const paddingClientes = {
+const paddingCliente = {
   padding: "50px",
 };
 
-const ClienteFormulario = ({ createCliente }) => {
-  const [cliente, setCliente] = useState(INITIAL_CLIENTE);
+const ClienteActualizar = ({
+  match,
+  updateCliente,
+  clienteActual,
+  fetchClienteById,
+}) => {
+  const [cliente, setCliente] = useState({
+    nombre: "",
+    apellido: "",
+    cedula: "",
+    sexo: "",
+  });
+
+  useEffect(() => {
+    console.log(match.params._id);
+    fetchClienteById(match.params._id);
+  }, []);
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [valido, setValido] = useState(false);
+
+  useEffect(() => {
+    const clienteId = match.params._id;
+
+    fetchClienteById(clienteId).then(() =>
+      setCliente({
+        nombre: clienteActual.nombre,
+        apellido: clienteActual.apellido,
+        cedula: clienteActual.cedula,
+        sexo: clienteActual.sexo,
+      })
+    );
+  }, []);
 
   useEffect(() => {
     const formularioValido = Object.values(cliente).every((v) => Boolean(v));
@@ -39,11 +64,12 @@ const ClienteFormulario = ({ createCliente }) => {
     event.preventDefault();
 
     try {
-      await createCliente({ ...cliente });
+      await updateCliente(match.params._id, { ...cliente });
 
+      notyf.success("Cliente actualizado satisfactoriamente.");
       setSuccess(true);
     } catch (error) {
-      setError(error.response.data.error);
+      notyf.error(error.response.data.error);
     }
   };
 
@@ -60,11 +86,11 @@ const ClienteFormulario = ({ createCliente }) => {
 
   return (
     <div className="container mt-4">
-      <div className="row " style={paddingClientes}>
+      <div className="row " style={paddingCliente}>
         {success && <Redirect to="/clientes"></Redirect>}
-        <div>
+        {clienteActual && (
           <div>
-            <h4>Crear cliente</h4>
+            <h4>Actualizar el cliente</h4>
             <Form
               onSubmitCapture={(e) => handleSubmit(e)}
               validateMessages={validateMessages}
@@ -75,9 +101,9 @@ const ClienteFormulario = ({ createCliente }) => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Nombre"
-                  name="nombre"
                   value={cliente.nombre}
+                  placeholder={clienteActual.nombre}
+                  name="nombre"
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -88,36 +114,9 @@ const ClienteFormulario = ({ createCliente }) => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  placeholder="Apellido"
-                  name="apellido"
                   value={cliente.apellido}
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </Form.Item>
-              <Form.Item
-                name={"cedula"}
-                label="Cedula"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  placeholder="Cédula"
-                  name="cedula"
-                  maxLength="11"
-                  value={cliente.cedula}
-                  className="form-control"
-                  onChange={handleChange}
-                />
-              </Form.Item>
-              <Form.Item
-                name={"sexo"}
-                label="Sexo"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  placeholder="Femenino o Masculino"
-                  value={cliente.sexo}
-                  name="sexo"
+                  placeholder={clienteActual.apellido}
+                  name="Apellido"
                   className="form-control"
                   onChange={handleChange}
                 />
@@ -131,14 +130,21 @@ const ClienteFormulario = ({ createCliente }) => {
                 </div>
               )}
               <Button type="primary" disabled={!valido} htmlType="submit">
-                Crear
+                Actualizar
               </Button>
             </Form>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default connect(null, { createCliente })(ClienteFormulario);
+const mapStateToProps = (state) => ({
+  clienteActual: state.clientes.clienteActual,
+});
+
+export default connect(mapStateToProps, {
+  updateCliente,
+  fetchClienteById,
+})(ClienteActualizar);

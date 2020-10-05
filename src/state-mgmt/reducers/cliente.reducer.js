@@ -9,6 +9,7 @@ import {
 const initialState = {
   clientes: [],
   cliente: {},
+  clienteActual: {},
 };
 
 export default function (state = initialState, action) {
@@ -21,7 +22,7 @@ export default function (state = initialState, action) {
     case FETCH_CLIENTE:
       return {
         ...state,
-        cliente: action.payload,
+        clienteActual: action.payload,
       };
     case FETCH_CLIENTE_BY_USUARIO_ID:
       return {

@@ -51,6 +51,11 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="14">
+                  <Link to="/prestamos">
+                    Prestamos
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="15">
                   <Link to="/usuarios">Usuarios</Link>
                 </Menu.Item>
                 <SubMenu

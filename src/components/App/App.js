@@ -29,8 +29,13 @@ import UsuariosLista from "../Usuario/UsuarioLista";
 import UsuarioDetalles from "../Usuario/UsuarioDetalles";
 import UsuarioCrear from "../Usuario/UsuarioCrear";
 import InicioSesion from "../Auth/InicioSesion";
+import ClienteActualizar from "../Cliente/ClienteActualizar";
+import PrestamoLista from "../Prestamo/PrestamoLista";
+import PrestamoFormulario from "../Prestamo/PrestamoFormulario";
+import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
 
 import "notyf/notyf.min.css";
+
 
 const App = () => {
   return (
@@ -43,6 +48,10 @@ const App = () => {
 
           <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
           <SecuredRoute path="/clientes" component={ClienteLista} />
+          <SecuredRoute
+            path="/clientes/:_id/editar"
+            component={ClienteActualizar}
+          />
 
           <SecuredRoute
             path="/sucursales/crear"
@@ -83,6 +92,12 @@ const App = () => {
 
           <SecuredRoute path="/cuentas" component={CuentaLista} />
 
+          <SecuredRoute path="/prestamos" component={PrestamoLista} />
+          <SecuredRoute path="/prestamos/crear" component={PrestamoFormulario} />
+          <SecuredRoute
+            path="/prestamos/:_id/editar"
+            component={PrestamoActualizar}
+    
           <SecuredRoute path="/usuarios" component={UsuariosLista} />
           <SecuredRoute path="/usuarios/crear" component={UsuarioCrear} />
           <SecuredRoute

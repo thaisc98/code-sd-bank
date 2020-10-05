@@ -1,8 +1,10 @@
 import {
   FETCH_CLIENTES,
+  FETCH_CLIENTE,
   FETCH_CLIENTE_BY_USUARIO_ID,
   CREATE_CLIENTE,
   DELETE_CLIENTE,
+  UPDATE_CLIENTE,
 } from "../types/cliente.types";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
@@ -16,6 +18,15 @@ export const fetchClientes = () => async (dispatch) => {
   });
 };
 
+export const fetchClienteById = (_id) => async (dispatch) => {
+  const { data } = await axios.get(`${API_URL}/clientes/${_id}`);
+
+  dispatch({
+    type: FETCH_CLIENTE,
+    payload: data,
+  });
+};
+
 export const createCliente = (cliente) => async (dispatch) => {
   const headers = {
     "content-type": "application/json",
@@ -25,6 +36,23 @@ export const createCliente = (cliente) => async (dispatch) => {
 
   dispatch({
     type: CREATE_CLIENTE,
+    payload: data,
+  });
+};
+
+export const updateCliente = (_id, cliente) => async (dispatch) => {
+  const headers = {
+    "content-type": "application/json",
+  };
+
+  const { data } = await axios.put(
+    `${API_URL}/clientes/${_id}`,
+    cliente,
+    headers
+  );
+
+  dispatch({
+    type: UPDATE_CLIENTE,
     payload: data,
   });
 };
