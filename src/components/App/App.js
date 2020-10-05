@@ -36,7 +36,6 @@ import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
 
 import "notyf/notyf.min.css";
 
-
 const App = () => {
   return (
     <Provider store={store}>
@@ -93,11 +92,15 @@ const App = () => {
           <SecuredRoute path="/cuentas" component={CuentaLista} />
 
           <SecuredRoute path="/prestamos" component={PrestamoLista} />
-          <SecuredRoute path="/prestamos/crear" component={PrestamoFormulario} />
+          <SecuredRoute
+            path="/prestamos/crear"
+            component={PrestamoFormulario}
+          />
           <SecuredRoute
             path="/prestamos/:_id/editar"
             component={PrestamoActualizar}
-    
+          />
+
           <SecuredRoute path="/usuarios" component={UsuariosLista} />
           <SecuredRoute path="/usuarios/crear" component={UsuarioCrear} />
           <SecuredRoute
