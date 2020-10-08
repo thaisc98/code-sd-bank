@@ -36,6 +36,7 @@ import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
 import CuentaFormulario from "../Cuenta/CuentaFormulario";
 import "notyf/notyf.min.css";
 import ClienteDetails from "../Cliente/ClienteDetails";
+import PerfilDetails from "../Perfil/PerfilDetails";
 
 const App = () => {
   return (
@@ -79,6 +80,10 @@ const App = () => {
           <SecuredRoute path="/cajeros" component={CajeroLista} />
 
           <SecuredRoute path="/perfiles" component={PerfilLista} />
+          <SecuredRoute
+            path="/perfiles/:_id/detalles"
+            component={PerfilDetails}
+          />
 
           <SecuredRoute
             path="/tipos-de-transacciones"

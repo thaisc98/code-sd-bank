@@ -51,7 +51,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
       key: "operacion",
       render: (_, perfil) => (
         <span>
-          <Link to={`/perfil/${perfil._id}/detalles`}>
+          <Link to={`/perfiles/${perfil._id}/detalles`}>
             <EyeOutlined
               style={{
                 fontSize: "1.3rem",
@@ -59,7 +59,7 @@ const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
               }}
             />
           </Link>
-          <Link to={`perfil/${perfil._id}/editar`}>
+          <Link to={`perfiles/${perfil._id}/editar`}>
             <EditOutlined style={editIStyles} />
           </Link>
           <DeleteOutlined

@@ -17,7 +17,8 @@ export const fetchPerfiles = () => async (dispatch) => {
   });
 };
 
-export const getPefil = (_id) => async (dispatch) => {
+export const getPerfilById = (_id) => async (dispatch) => {
+  console.log("id", _id);
   const { data } = await axios.get(`${API_URL}/perfiles/${_id}`);
 
   dispatch({

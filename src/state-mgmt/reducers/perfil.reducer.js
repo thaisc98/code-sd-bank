@@ -8,6 +8,7 @@ import {
 const initialState = {
   perfiles: [],
   perfil: {},
+  perfilActual: {},
 };
 
 export default function (state = initialState, action) {
@@ -20,7 +21,7 @@ export default function (state = initialState, action) {
     case FETCH_PERFIL:
       return {
         ...state,
-        perfil: action.payload,
+        perfilActual: action.payload,
       };
     case CREATE_PERFIL:
       return {

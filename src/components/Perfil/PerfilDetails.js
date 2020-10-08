@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchPerfilById } from "../../state-mgmt/actions/perfil.actions";
+import { getPerfilById } from "../../state-mgmt/actions/perfil.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Button, Descriptions } from "antd";
 import { Link } from "react-router-dom";
 import { LeftOutlined } from "@ant-design/icons";
 
-const PerfilDetails = ({ match, perfilActual, fetchPerfilById }) => {
+const PerfilDetails = ({ match, perfilActual, getPerfilById }) => {
   useEffect(() => {
     const init = async () => {
-      await fetchPerfilById(match.params._id);
+      await getPerfilById(match.params._id);
     };
     init();
 
-    console.log('perfilA',perfilActual)
+    console.log("perfilA", perfilActual);
   }, []);
 
   return (
@@ -26,9 +26,7 @@ const PerfilDetails = ({ match, perfilActual, fetchPerfilById }) => {
       <h3>Detalles del Perfil</h3>
       {perfilActual && (
         <Descriptions bordered layout="vertical" column={{ xxl: 4, xl: 4 }}>
-          <Descriptions.Item label="Rol">
-            {perfilActual.rol}
-          </Descriptions.Item>
+          <Descriptions.Item label="Rol">{perfilActual.rol}</Descriptions.Item>
           <Descriptions.Item label="Descripcion">
             {perfilActual.descripcion}
           </Descriptions.Item>
@@ -52,5 +50,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  fetchPerfilById,
+  getPerfilById,
 })(PerfilDetails);
