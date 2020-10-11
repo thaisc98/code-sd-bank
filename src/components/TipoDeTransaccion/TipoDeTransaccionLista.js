@@ -11,7 +11,7 @@ import {
   fetchTiposDeTransacciones,
   deleteTipoDeTransaccion,
 } from "../../state-mgmt/actions/tipo-de-transaccion.actions";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined,EyeOutlined } from "@ant-design/icons";
 
 const TipoDeTransaccionLista = ({
   fetchTiposDeTransacciones,
@@ -42,6 +42,15 @@ const TipoDeTransaccionLista = ({
       key: "operacion",
       render: (_, tipoDeTransaccion) => (
         <span>
+          <Link to={`tipos-de-transacciones/${tipoDeTransaccion._id}/detalles`}>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
+            </Link>
+
           <Link to={`tipos-de-transacciones/${tipoDeTransaccion._id}/editar`}>
             <EditOutlined style={editIStyles} />
           </Link>

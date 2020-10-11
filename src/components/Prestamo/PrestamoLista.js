@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { fetchPrestamos } from "../../state-mgmt/actions/prestamo.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Layout } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { Link } from "react-router-dom";
 
@@ -35,10 +35,6 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       dataIndex: "cantidad_total",
     },
     {
-      title: "Cliente",
-      dataIndex: "cliente",
-    },
-    {
       title: "Fecha de Registro",
       dataIndex: "createdAt",
     },
@@ -51,6 +47,14 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       key: "operacion",
       render: (_, prestamo) => (
         <span>
+          <Link to={`/prestamos/${prestamo._id}/detalles`}>
+            <EyeOutlined
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "20px",
+              }}
+            />
+          </Link>
           <Link to={`prestamo/${prestamo._id}/editar`}>
             <EditOutlined style={editIStyles} />
           </Link>
@@ -78,7 +82,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
 
   return (
     <Content className="container mt-4">
-      <h2 className="title-styles">Prestamos</h2>
+      <h2 className="title-styles">Préstamos</h2>
       <Button
         type="primary"
         className="create-btn-styles"

@@ -44,7 +44,7 @@ export const updatePrestamo = (_id, prestamo) => async (dispatch) => {
   };
 
   const { data } = await axios.put(
-    `${API_URL}/prestamo/${_id}`,
+    `${API_URL}/prestamos/${_id}`,
     prestamo,
     headers
   );
