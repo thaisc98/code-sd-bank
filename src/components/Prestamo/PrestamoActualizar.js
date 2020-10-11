@@ -18,9 +18,7 @@ const PrestamoActualizar = ({
   prestamoActual,
   fetchPrestamoByClienteId,
 }) => {
-  const [prestamo, setPrestamo] = useState({
-    descripcion: "",
-  });
+  const [prestamo, setPrestamo] = useState({descripcion: "",});
 
   useEffect(() => {
     console.log(match.params._id);
@@ -57,8 +55,9 @@ const PrestamoActualizar = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log('prestamo', prestamo)
     try {
-      await updatePrestamo(match.params._id, { ...prestamo });
+      await updatePrestamo(prestamoActual._id, { ...prestamo });
 
       notyf.success("Prestamo actualizado satisfactoriamente.");
       setSuccess(true);
@@ -91,13 +90,13 @@ const PrestamoActualizar = ({
             >
               <Form.Item
                 name={"descripcion"}
-                label="Nombre"
+                label="Descripción:"
                 rules={[{ required: true }]}
               >
                 <Input
                   value={prestamoActual.descripcion}
                   placeholder={prestamoActual.descripcion}
-                  name="nombre"
+                  name="descripcion"
                   className="form-control"
                   onChange={handleChange}
                 />

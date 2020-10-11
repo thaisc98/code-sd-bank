@@ -89,7 +89,7 @@ const PerfilFormulario = ({ createPerfil }) => {
               </Form.Item>
               <Form.Item
                 name={"tipo_entidad_asociada"}
-                label="EntidadAsociada"
+                label="Entidad Asociada"
                 rules={[{ required: true }]}
               >
                 <Radio.Group

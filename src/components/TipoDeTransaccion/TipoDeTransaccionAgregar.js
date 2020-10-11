@@ -75,8 +75,8 @@ const TipoDeTransaccionAgregar = ({
               validateMessages={validateMessages}
             >
               <Form.Item
-                name={"Tipo"}
-                label="tipo"
+                name={"tipo"}
+                label="Tipo"
                 rules={[{ required: true }]}
               >
                 <Input

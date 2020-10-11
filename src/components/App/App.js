@@ -36,6 +36,8 @@ import PrestamoActualizar from "../Prestamo/PrestamoActualizar";
 import CuentaFormulario from "../Cuenta/CuentaFormulario";
 import "notyf/notyf.min.css";
 import ClienteDetails from "../Cliente/ClienteDetails";
+import TipoDeTransaccionDetalles from "../TipoDeTransaccion/TipoDeTransaccionDetalles";
+import PrestamoDetalles from "../Prestamo/PrestamoDetalles";
 
 const App = () => {
   return (
@@ -52,7 +54,6 @@ const App = () => {
             path="/clientes/:_id/editar"
             component={ClienteActualizar}
           />
-
           <SecuredRoute
             path="/clientes/:_id/detalles"
             component={ClienteDetails}
@@ -62,16 +63,14 @@ const App = () => {
             path="/sucursales/crear"
             component={SucursalFormulario}
           />
-
           <SecuredRoute path="/sucursales" component={SucursalLista} />
 
-          <SecuredRoute path="/cajeros/crear" component={CajeroFormulario} />
 
+          <SecuredRoute path="/cajeros/crear" component={CajeroFormulario} />
           <SecuredRoute
             path="/cajeros/:_id/auth/registrar"
             component={UsuarioCajeroRegistro}
           />
-
           <SecuredRoute
             path="/cajeros/:_id/detalles"
             component={CajeroDetalles}
@@ -84,15 +83,17 @@ const App = () => {
             path="/tipos-de-transacciones"
             component={TipoDeTransaccionLista}
           />
-
           <SecuredRoute
             path="/tipos-de-transacciones/crear"
             component={TipoDeTransaccionAgregar}
           />
-
           <SecuredRoute
             path="/tipos-de-transacciones/:_id/editar"
             component={TipoDeTransaccionActualizar}
+          />
+            <SecuredRoute
+            path="/tipos-de-transacciones/:_id/detalles"
+            component={TipoDeTransaccionDetalles}
           />
 
           <SecuredRoute path="/cuentas" component={CuentaLista} />
@@ -106,6 +107,10 @@ const App = () => {
           <SecuredRoute
             path="/prestamo/:_id/editar"
             component={PrestamoActualizar}
+          />
+          <SecuredRoute
+            path="/prestamos/:_id/detalles"
+            component={PrestamoDetalles}
           />
 
           <SecuredRoute path="/usuarios" component={UsuariosLista} />
