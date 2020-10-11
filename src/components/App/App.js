@@ -104,7 +104,7 @@ const App = () => {
             component={PrestamoFormulario}
           />
           <SecuredRoute
-            path="/prestamos/:_id/editar"
+            path="/prestamo/:_id/editar"
             component={PrestamoActualizar}
           />
 
