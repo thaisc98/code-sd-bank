@@ -25,18 +25,18 @@ const PerfilDetails = ({ match, perfilActual, getPerfilById }) => {
       </Link>
       <h3>Detalles del Perfil</h3>
       {perfilActual && (
-        <Descriptions bordered layout="vertical" column={{ xxl: 4, xl: 4 }}>
-          <Descriptions.Item label="Rol">{perfilActual.rol}</Descriptions.Item>
-          <Descriptions.Item label="Descripcion">
+        <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
+          <Descriptions.Item label="Rol: ">{perfilActual.rol}</Descriptions.Item>
+          <Descriptions.Item label="Descripcion:">
             {perfilActual.descripcion}
           </Descriptions.Item>
-          <Descriptions.Item label="Entidad Asociada">
+          <Descriptions.Item label="Entidad Asociada:">
             {perfilActual.tipo_entidad_asociada}
           </Descriptions.Item>
-          <Descriptions.Item label="Creado en">
+          <Descriptions.Item label="Creado en:">
             {getReadibleDate(perfilActual.createdAt)}
           </Descriptions.Item>
-          <Descriptions.Item label="Última actualización">
+          <Descriptions.Item label="Última actualización:">
             {getReadibleDate(perfilActual.createdAt)}
           </Descriptions.Item>
         </Descriptions>

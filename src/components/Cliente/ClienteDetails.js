@@ -23,7 +23,7 @@ const ClienteDetails = ({ match, clienteActual, fetchClienteById }) => {
       </Link>
       <h3>Detalles del cliente</h3>
       {clienteActual && (
-        <Descriptions bordered layout="vertical" column={{ xxl: 4, xl: 4 }}>
+        <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
           <Descriptions.Item label="Nombre">
             {clienteActual.nombre}
           </Descriptions.Item>
