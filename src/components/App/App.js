@@ -47,7 +47,7 @@ const App = () => {
         <Header />
         <div>
           <Route path="/" exact component={Home} />
-          <SecuredRoute path="/perfiles/crear" component={PerfilFormulario} />
+
 
           <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
           <SecuredRoute path="/clientes" component={ClienteLista} />
@@ -83,6 +83,7 @@ const App = () => {
             path="/perfiles/:_id/detalles"
             component={PerfilDetails}
           />
+          <SecuredRoute path="/perfiles/crear" component={PerfilFormulario} />
 
           <SecuredRoute
             path="/tipos-de-transacciones"
