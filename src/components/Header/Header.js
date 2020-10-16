@@ -22,10 +22,17 @@ const Header = ({ usuarioActual, admin, cerrarSesion }) => {
     <div>
       <HeaderL className="header">
         <div className="container">
+         
           <div className="logo" />
+           
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Link to="/">SD Bank</Link>
+              <Link to="/"><img
+                  className= "logo-img"
+                  src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1602797767/white-logo_hzrybt.png"
+                  alt="logo"
+                  style={{maxWidth: "70px", maxHeight: "50px"}}
+                /></Link>
             </Menu.Item>
             {/* <Menu.Item key="5" onClick={() => handleClick("clientes")}> */}
             {usuarioActual.email && (

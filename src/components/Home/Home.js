@@ -30,9 +30,8 @@ const Home = () => {
               width: "70%",
             }}
             class="center"
-            height="100%"
-            width="70%"
-            src={require("C:/Users/Alien Ware/OneDrive/Documentos/INTEC/Prog 3/core-sd-bank/src/assert/bank2.png")}
+            width="400" height="400"
+            src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1602795502/black_logo_qej0gv.png"
           />
         </div>
         <div>
@@ -46,7 +45,7 @@ const Home = () => {
             class="center"
             height="100%"
             width="100%"
-            src={require("C:/Users/Alien Ware/OneDrive/Documentos/INTEC/Prog 3/core-sd-bank/src/assert/bank3.PNG")}
+            src="https://res.cloudinary.com/dmjuegn3l/image/upload/v1602816925/bank3.png"
           />
         </div>
       </Carousel>
