@@ -121,7 +121,7 @@ const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
       {create && <Redirect to="/usuarios/crear"></Redirect>}
       <Table
         responsive
-        // scroll={{ y: 390 }}
+        pagination={{ pageSize: 7 }}
         className="ant-table"
         columns={columns}
         bordered

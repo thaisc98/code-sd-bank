@@ -97,11 +97,11 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       {create && <Redirect to="/prestamos/crear"></Redirect>}
       <Table
         responsive
+        pagination={{ pageSize: 5 }}
         className="ant-table"
         columns={columns}
         bordered
         dataSource={dataMapped}
-        scroll={{ y: 380 }}
       />
     </Content>
   );

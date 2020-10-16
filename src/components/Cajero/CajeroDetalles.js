@@ -57,9 +57,6 @@ const CajeroDetalles = ({
             <Descriptions.Item label="Cédula">
               {cajero.cedula}
             </Descriptions.Item>
-            {/* <Descriptions.Item label="Sucursal a la que pertenece: ">
-              {""}
-            </Descriptions.Item> */}
             <Descriptions.Item label="Creado en">
               {getReadibleDate(cajero.createdAt)}
             </Descriptions.Item>

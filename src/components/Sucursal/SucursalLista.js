@@ -120,10 +120,6 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
     marginBottom: ".8rem",
   };
 
-  const getScrollY = () => {
-    return sucursales.length > 5 ? 370 : 410;
-  };
-
   const { Content } = Layout;
 
   return (
@@ -139,7 +135,6 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
       {create && <Redirect to="/sucursales/crear"></Redirect>}
       <Table
         responsive
-        // scroll={{ y: getScrollY() }}
         className="ant-table"
         columns={columns}
         bordered
