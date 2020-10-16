@@ -97,7 +97,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       {create && <Redirect to="/prestamos/crear"></Redirect>}
       <Table
         responsive
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 4 }}
         className="ant-table"
         columns={columns}
         bordered
