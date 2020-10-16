@@ -18,6 +18,7 @@ const CajeroDetalles = ({
   cajeroUsuario,
   fetchCajeroById,
   fetchUsuarioCajero,
+  cajeroActual,
 }) => {
   const [searchable, setSearchable] = useState(false);
 
@@ -32,39 +33,39 @@ const CajeroDetalles = ({
   }, []);
 
   useEffect(() => {
-    fetchSucursalById(cajero.sucursal);
-    fetchUsuarioCajero(cajero._id);
+    fetchSucursalById(cajeroActual.sucursal);
+    fetchUsuarioCajero(cajeroActual._id);
   }, [searchable]);
 
   return (
     <div className="container mt-4">
-      <Link to="/cajeros">
+      <Link to="/sucursales">
         <Button type="primary" className="mb-4">
           <LeftOutlined />
         </Button>
       </Link>
 
       <h2>Detalles del cajero</h2>
-      {cajero && (
+      {cajeroActual && (
         <>
           <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
             <Descriptions.Item label="Nombre">
-              {cajero.nombre}
+              {cajeroActual.nombre}
             </Descriptions.Item>
             <Descriptions.Item label="Apellido">
-              {cajero.apellido}
+              {cajeroActual.apellido}
             </Descriptions.Item>
             <Descriptions.Item label="Cédula">
-              {cajero.cedula}
+              {cajeroActual.cedula}
             </Descriptions.Item>
             <Descriptions.Item label="Creado en">
-              {getReadibleDate(cajero.createdAt)}
+              {getReadibleDate(cajeroActual.createdAt)}
             </Descriptions.Item>
             <Descriptions.Item label="Última actualización">
-              {getReadibleDate(cajero.updatedAt)}
+              {getReadibleDate(cajeroActual.updatedAt)}
             </Descriptions.Item>
           </Descriptions>
-          {cajero.usuario && cajeroUsuario ? (
+          {cajeroActual.usuario && cajeroUsuario ? (
             <Alert
               message="Info"
               description={`El cajero tiene cuenta de usuario, su correo del usuario es: ${cajeroUsuario.email} `}
@@ -73,7 +74,7 @@ const CajeroDetalles = ({
             />
           ) : (
             <p>
-              <Link to={`/cajeros/${cajero._id}/auth/registrar`}>
+              <Link to={`/cajeros/${cajeroActual._id}/auth/registrar`}>
                 <Alert
                   message="Info"
                   description="Este cajero no tiene ninguna cuenta de usuario, click para crear cuenta de usuario"
@@ -91,7 +92,7 @@ const CajeroDetalles = ({
 
 const mapStateToProps = (state) => ({
   sucursal: state.sucursales.sucursal,
-  cajero: state.cajeros.cajero,
+  cajeroActual: state.cajeros.cajeroActual,
   cajeroUsuario: state.cajeros.cajeroUsuario,
 });
 

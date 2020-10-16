@@ -82,7 +82,7 @@ export const updateCajero = (_id, cajero) => async (dispatch) => {
     "content-type": "application/json",
   };
 
-  const { data } = await axios.post(
+  const { data } = await axios.put(
     `${API_URL}/cajeros/${_id}`,
     cajero,
     headers

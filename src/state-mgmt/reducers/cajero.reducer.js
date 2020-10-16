@@ -13,6 +13,7 @@ const initialState = {
   cajeros: [],
   cajero: {},
   cajeroUsuario: {},
+  cajeroActual: {},
 };
 
 export default function (state = initialState, action) {
@@ -25,7 +26,7 @@ export default function (state = initialState, action) {
     case FETCH_CAJERO:
       return {
         ...state,
-        cajero: action.payload,
+        cajeroActual: action.payload,
       };
     case FETCH_USUARIO_CAJERO:
       return {

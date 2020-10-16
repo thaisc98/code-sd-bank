@@ -43,6 +43,7 @@ import SucursalActualizar from "../Sucursal/SucursalActualizar";
 import SucursalDetalles from "../Sucursal/SucursalDetalles";
 import PerfilActualizar from "../Perfil/PerfilActualizar";
 import CuentaDetalles from "../Cuenta/CuentaDetalles";
+import CajeroActualizar from "../Cajero/CajeroActualizar";
 
 const App = () => {
   return (
@@ -84,6 +85,11 @@ const App = () => {
             component={CajeroDetalles}
           />
           <SecuredRoute path="/cajeros" component={CajeroLista} />
+          <SecuredRoute
+            path="/cajeros/:_id/editar"
+            component={CajeroActualizar}
+          />
+
           <SecuredRoute path="/perfiles" component={PerfilLista} />
           <SecuredRoute
             path="/perfiles/:_id/detalles"
@@ -94,7 +100,6 @@ const App = () => {
             path="/perfiles/:_id/editar"
             component={PerfilActualizar}
           />
-
           <SecuredRoute
             path="/tipos-de-transacciones"
             component={TipoDeTransaccionLista}
