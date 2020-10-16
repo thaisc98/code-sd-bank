@@ -7,6 +7,7 @@ import {
 const initialState = {
   cuentas: [],
   cuenta: {},
+  cuentaActual: {},
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +20,7 @@ export default function (state = initialState, action) {
     case FETCH_CUENTA:
       return {
         ...state,
-        cuenta: action.payload,
+        cuentaActual: action.payload,
       };
     case CREATE_CUENTA:
       return {

@@ -43,7 +43,7 @@ const CuentaLista = ({ fetchCuentas, cuentas }) => {
       key: "operacion",
       render: (_, cuenta) => (
         <span>
-          <Link to={`/cuenta/${cuenta._id}/detalles`}>
+          <Link to={`/cuentas/${cuenta._id}/detalles`}>
             <EyeOutlined
               style={{
                 fontSize: "1.3rem",

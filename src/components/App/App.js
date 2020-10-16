@@ -42,6 +42,7 @@ import PrestamoDetalles from "../Prestamo/PrestamoDetalles";
 import SucursalActualizar from "../Sucursal/SucursalActualizar";
 import SucursalDetalles from "../Sucursal/SucursalDetalles";
 import PerfilActualizar from "../Perfil/PerfilActualizar";
+import CuentaDetalles from "../Cuenta/CuentaDetalles";
 
 const App = () => {
   return (
@@ -112,6 +113,10 @@ const App = () => {
           />
           <SecuredRoute path="/cuentas" component={CuentaLista} />
           <SecuredRoute path="/cuentas/crear" component={CuentaFormulario} />
+          <SecuredRoute
+            path="/cuentas/:_id/detalles"
+            component={CuentaDetalles}
+          />
           <SecuredRoute path="/prestamos" component={PrestamoLista} />
           <SecuredRoute
             path="/prestamos/crear"

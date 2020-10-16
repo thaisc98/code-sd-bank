@@ -137,7 +137,6 @@ const PerfilLista = ({ fetchPerfiles, perfiles, deletePerfil }) => {
       <Table
         className="ant-table"
         columns={columns}
-        pagination={{ pageSize: 10 }}
         bordered
         dataSource={dataMapped}
       />

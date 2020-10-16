@@ -195,7 +195,7 @@ const UsuarioCrear = ({
                 label="Contraseña"
                 rules={[{ required: true }]}
               >
-                <Input
+                <Input.Password
                   placeholder="Contraseña"
                   name="contrasenia"
                   value={usuario.contrasenia}
@@ -210,7 +210,7 @@ const UsuarioCrear = ({
                 label="Confirmación de contraseña"
                 rules={[{ required: true }]}
               >
-                <Input
+                <Input.Password
                   placeholder="Confirme su contraseña"
                   value={usuario.confirmacionContrasenia}
                   name="confirmacionContrasenia"

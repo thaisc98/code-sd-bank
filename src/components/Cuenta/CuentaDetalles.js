@@ -1,50 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { fetchCuentaById } from "../../state-mgmt/actions/cuenta.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
 import { Button, Descriptions } from "antd";
 import { Link } from "react-router-dom";
 import { LeftOutlined } from "@ant-design/icons";
-import { fetchPrestamoByClienteId } from "../../state-mgmt/actions/prestamo.actions";
 
-const PrestamoDetalles = ({
-  match,
-  prestamoActual,
-  fetchPrestamoByClienteId,
-}) => {
+const CuentaDetalles = ({ match, cuentaActual, fetchCuentaById }) => {
   useEffect(() => {
     const init = async () => {
-      await fetchPrestamoByClienteId(match.params._id);
+      await fetchCuentaById(match.params._id);
     };
-
     init();
   }, []);
+
   return (
     <div className="container mt-4">
-      <Link to="/prestamos">
+      <Link to="/cuentas">
         <Button type="primary" className="mb-4">
           <LeftOutlined />
         </Button>
       </Link>
-      <h3>Detalles de préstamo</h3>
-      {prestamoActual && (
+      <h3>Detalles del cuentas</h3>
+      {cuentaActual && (
         <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
-          <Descriptions.Item label="Descripcion">
-            {prestamoActual.descripcion}
+          <Descriptions.Item label="Número de cuenta">
+            {cuentaActual.numero_de_cuenta}
           </Descriptions.Item>
-          <Descriptions.Item label="Cantidad total:">
-            {prestamoActual.cantidad_total}
+          <Descriptions.Item label="Balance disponible">
+            {cuentaActual.balance_disponible}
           </Descriptions.Item>
-          <Descriptions.Item label="Cantidad saldada:">
-            {prestamoActual.cantidad_saldada}
+          <Descriptions.Item label="Cantidad total de tránsito">
+            {cuentaActual.cantidad_total_en_transito}
           </Descriptions.Item>
-          <Descriptions.Item label="Cantidad restante:">
-            {prestamoActual.cantidad_restante}
+          <Descriptions.Item label="Número de cuenta">
+            {cuentaActual.numero_de_cuenta}
           </Descriptions.Item>
           <Descriptions.Item label="Creado en">
-            {getReadibleDate(prestamoActual.createdAt)}
+            {getReadibleDate(cuentaActual.createdAt)}
           </Descriptions.Item>
           <Descriptions.Item label="Última actualización">
-            {getReadibleDate(prestamoActual.createdAt)}
+            {getReadibleDate(cuentaActual.createdAt)}
           </Descriptions.Item>
         </Descriptions>
       )}
@@ -53,9 +49,9 @@ const PrestamoDetalles = ({
 };
 
 const mapStateToProps = (state) => ({
-  prestamoActual: state.prestamos.prestamoActual,
+  cuentaActual: state.cuentas.cuentaActual,
 });
 
 export default connect(mapStateToProps, {
-  fetchPrestamoByClienteId,
-})(PrestamoDetalles);
+  fetchCuentaById,
+})(CuentaDetalles);

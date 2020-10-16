@@ -67,7 +67,7 @@ export const updateUsuario = (_id, usuario) => async (dispatch) => {
     "content-type": "application/json",
   };
 
-  const { data } = await axios.post(
+  const { data } = await axios.put(
     `${API_URL}/usuarios/${_id}`,
     usuario,
     headers

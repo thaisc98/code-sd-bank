@@ -96,11 +96,12 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       </Button>
       {create && <Redirect to="/prestamos/crear"></Redirect>}
       <Table
-        scroll={{ y: getScrollY() }}
+        responsive
         className="ant-table"
         columns={columns}
         bordered
         dataSource={dataMapped}
+        scroll={{ y: 380 }}
       />
     </Content>
   );

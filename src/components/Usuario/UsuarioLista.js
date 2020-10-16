@@ -120,6 +120,8 @@ const UsuarioLista = ({ fetchUsuarios, usuarios, deleteUsuario }) => {
       </Button>
       {create && <Redirect to="/usuarios/crear"></Redirect>}
       <Table
+        responsive
+        // scroll={{ y: 390 }}
         className="ant-table"
         columns={columns}
         bordered

@@ -27,7 +27,7 @@ const TipoDeTransaccionDetalles = ({
       </Link>
       <h3>Detalles de la transacción</h3>
       {tipoDeTransaccionActual && (
-        <Descriptions bordered layout="vertical" column={{ xxl: 4, xl: 4 }}>
+        <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
           <Descriptions.Item label="Nombre">
             {tipoDeTransaccionActual.tipo}
           </Descriptions.Item>

@@ -9,6 +9,7 @@ import {
   cerrarDetalles,
 } from "../../state-mgmt/actions/usuario.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
+import { Descriptions } from "antd";
 
 const UsuarioDetalles = ({
   match,
@@ -36,42 +37,34 @@ const UsuarioDetalles = ({
 
   return (
     <div className="container mt-4">
+      <Link to="/usuarios">
+        <Button className="mb-4" type="primary">
+          <i className="fas fa-arrow-left"></i>
+        </Button>
+      </Link>
+      <h2 className="mb-3">Detalles del usuario</h2>
       {usuario && entidadAsociada && (
-        <div>
-          <Link to="/usuarios">
-            <Button className="mb-4" type="primary">
-              <i className="fas fa-arrow-left"></i>
-            </Button>
-          </Link>
-
-          <h2 className="mb-3">Detalles del usuario</h2>
-          <div className="entity-details">
-            <p>
-              <b>Nombre completo: </b>
-              {entidadAsociada.nombre} {entidadAsociada.apellido}
-            </p>
-            <p>
-              <b>Cédula: </b>
-              {entidadAsociada.cedula}
-            </p>
-            <p>
-              <b>Email: </b>
-              {usuario.email}
-            </p>
-            <p>
-              <b>Entidad asociada: </b>
-              {usuario.tipo_entidad_asociada}
-            </p>
-            <p>
-              <b>Usuario creado en: </b>
-              {getReadibleDate(usuario.createdAt)}
-            </p>
-            <p>
-              <b>{usuario.tipo_entidad_asociada} creado en: </b>
-              {getReadibleDate(entidadAsociada.createdAt)}
-            </p>
-          </div>
-        </div>
+        <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
+          <Descriptions.Item label="Nombre completo">
+            {entidadAsociada.nombre} {entidadAsociada.apellido}
+          </Descriptions.Item>
+          <Descriptions.Item label="Cédula ">
+            {entidadAsociada.cedula}
+          </Descriptions.Item>
+          <Descriptions.Item label="Cédula ">
+            {usuario.tipo_entidad_asociada}
+          </Descriptions.Item>
+          <Descriptions.Item label="Email ">{usuario.email}</Descriptions.Item>
+          <Descriptions.Item label="Entidad asocieda ">
+            {usuario.tipo_entidad_asociada}
+          </Descriptions.Item>
+          <Descriptions.Item label="Creado en">
+            {getReadibleDate(usuario.createdAt)}
+          </Descriptions.Item>
+          <Descriptions.Item label="Última actualización">
+            {getReadibleDate(entidadAsociada.createdAt)}
+          </Descriptions.Item>
+        </Descriptions>
       )}
     </div>
   );
