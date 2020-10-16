@@ -39,6 +39,8 @@ import ClienteDetails from "../Cliente/ClienteDetails";
 import PerfilDetails from "../Perfil/PerfilDetails";
 import TipoDeTransaccionDetalles from "../TipoDeTransaccion/TipoDeTransaccionDetalles";
 import PrestamoDetalles from "../Prestamo/PrestamoDetalles";
+import SucursalActualizar from "../Sucursal/SucursalActualizar";
+import SucursalDetalles from "../Sucursal/SucursalDetalles";
 
 const App = () => {
   return (
@@ -47,8 +49,6 @@ const App = () => {
         <Header />
         <div>
           <Route path="/" exact component={Home} />
-
-
           <SecuredRoute path="/clientes/crear" component={ClienteFormulario} />
           <SecuredRoute path="/clientes" component={ClienteLista} />
           <SecuredRoute
@@ -59,13 +59,19 @@ const App = () => {
             path="/clientes/:_id/detalles"
             component={ClienteDetails}
           />
-
           <SecuredRoute
             path="/sucursales/crear"
             component={SucursalFormulario}
           />
           <SecuredRoute path="/sucursales" component={SucursalLista} />
-
+          <SecuredRoute
+            path="/sucursales/:_id/editar"
+            component={SucursalActualizar}
+          />
+          <SecuredRoute
+            path="/sucursales/:_id/detalles"
+            component={SucursalDetalles}
+          />
 
           <SecuredRoute path="/cajeros/crear" component={CajeroFormulario} />
           <SecuredRoute
@@ -77,14 +83,12 @@ const App = () => {
             component={CajeroDetalles}
           />
           <SecuredRoute path="/cajeros" component={CajeroLista} />
-
           <SecuredRoute path="/perfiles" component={PerfilLista} />
           <SecuredRoute
             path="/perfiles/:_id/detalles"
             component={PerfilDetails}
           />
           <SecuredRoute path="/perfiles/crear" component={PerfilFormulario} />
-
           <SecuredRoute
             path="/tipos-de-transacciones"
             component={TipoDeTransaccionLista}
@@ -97,14 +101,12 @@ const App = () => {
             path="/tipos-de-transacciones/:_id/editar"
             component={TipoDeTransaccionActualizar}
           />
-            <SecuredRoute
+          <SecuredRoute
             path="/tipos-de-transacciones/:_id/detalles"
             component={TipoDeTransaccionDetalles}
           />
-
           <SecuredRoute path="/cuentas" component={CuentaLista} />
           <SecuredRoute path="/cuentas/crear" component={CuentaFormulario} />
-
           <SecuredRoute path="/prestamos" component={PrestamoLista} />
           <SecuredRoute
             path="/prestamos/crear"
@@ -118,14 +120,12 @@ const App = () => {
             path="/prestamos/:_id/detalles"
             component={PrestamoDetalles}
           />
-
           <SecuredRoute path="/usuarios" component={UsuariosLista} />
           <SecuredRoute path="/usuarios/crear" component={UsuarioCrear} />
           <SecuredRoute
             path="/usuarios/:_id/detalles"
             component={UsuarioDetalles}
           />
-
           <AuthRoute path="/auth/inicio-sesion" component={InicioSesion} />
           <AuthRoute path="/auth/registro" component={Registro} />
         </div>

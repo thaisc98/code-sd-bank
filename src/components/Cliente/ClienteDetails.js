@@ -17,7 +17,7 @@ const ClienteDetails = ({ match, clienteActual, fetchClienteById }) => {
   return (
     <div className="container mt-4">
       <Link to="/clientes">
-        <Button className="mb-4">
+        <Button type="primary" className="mb-4">
           <LeftOutlined />
         </Button>
       </Link>

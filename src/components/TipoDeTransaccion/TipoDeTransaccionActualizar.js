@@ -66,7 +66,7 @@ const TipoDeTransaccionActualizar = ({
     try {
       await updateTipoDeTransaccion(match.params._id, { ...tipoDeTransaccion });
 
-      notyf.success("Tipo de transacción creado satisfactoriamente.");
+      notyf.success("Tipo de transacción actualizado satisfactoriamente.");
       setSuccess(true);
     } catch (error) {
       notyf.error(error.response.data.error);

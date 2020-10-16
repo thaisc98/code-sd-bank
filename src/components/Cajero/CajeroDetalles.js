@@ -6,8 +6,9 @@ import {
   fetchUsuarioCajero,
 } from "../../state-mgmt/actions/cajero.actions";
 import { getReadibleDate } from "../../utils/date-formatter";
-import { Button } from "antd";
+import { Alert, Button, Descriptions, message } from "antd";
 import { Link } from "react-router-dom";
+import { LeftOutlined } from "@ant-design/icons";
 
 const CajeroDetalles = ({
   match,
@@ -38,61 +39,54 @@ const CajeroDetalles = ({
   return (
     <div className="container mt-4">
       <Link to="/cajeros">
-        <Button className="mb-4" type="primary">
-          <i className="fas fa-arrow-left"></i>
+        <Button type="primary" className="mb-4">
+          <LeftOutlined />
         </Button>
       </Link>
 
       <h2>Detalles del cajero</h2>
       {cajero && (
-        <div>
-          <div className="cajero-detalles">
-            <p>
-              <b>Nombre: </b>
+        <>
+          <Descriptions bordered layout="horizontal" column={{ xxl: 4, xl: 1 }}>
+            <Descriptions.Item label="Nombre">
               {cajero.nombre}
-            </p>
-            <p>
-              <b>Apellido: </b>
+            </Descriptions.Item>
+            <Descriptions.Item label="Apellido">
               {cajero.apellido}
-            </p>
-            <p>
-              <b>Cédula: </b>
+            </Descriptions.Item>
+            <Descriptions.Item label="Cédula">
               {cajero.cedula}
-            </p>
-            <p>
-              <b>Sucursal a la que pertenece: </b>
-              {sucursal.nombre}
-            </p>
-            <p>
-              <b>Creado en: </b>
+            </Descriptions.Item>
+            {/* <Descriptions.Item label="Sucursal a la que pertenece: ">
+              {""}
+            </Descriptions.Item> */}
+            <Descriptions.Item label="Creado en">
               {getReadibleDate(cajero.createdAt)}
-            </p>
-            <p>
-              <b>Última actualización: </b>
-              {getReadibleDate(cajero.createdAt)}
-            </p>
-          </div>
-
+            </Descriptions.Item>
+            <Descriptions.Item label="Última actualización">
+              {getReadibleDate(cajero.updatedAt)}
+            </Descriptions.Item>
+          </Descriptions>
           {cajero.usuario && cajeroUsuario ? (
-            <div>
-              <p>
-                <b>Registrado: </b> Sí
-              </p>
-              <p>
-                <b>Correo de usuario:</b> {cajeroUsuario.email}
-              </p>
-            </div>
+            <Alert
+              message="Info"
+              description={`El cajero tiene cuenta de usuario, su correo del usuario es: ${cajeroUsuario.email} `}
+              type="info"
+              showIcon
+            />
           ) : (
             <p>
-              Este cajero no tiene ninguna cuenta de usuario.{" "}
-              <span>
-                <Link to={`/cajeros/${cajero._id}/auth/registrar`}>
-                  Crear cuenta de usuario
-                </Link>
-              </span>
+              <Link to={`/cajeros/${cajero._id}/auth/registrar`}>
+                <Alert
+                  message="Info"
+                  description="Este cajero no tiene ninguna cuenta de usuario, click para crear cuenta de usuario"
+                  type="info"
+                  showIcon
+                />
+              </Link>
             </p>
           )}
-        </div>
+        </>
       )}
     </div>
   );

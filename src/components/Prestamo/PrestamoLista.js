@@ -80,6 +80,10 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
 
   const { Content } = Layout;
 
+  const getScrollY = () => {
+    return prestamos.length > 5 ? 370 : 410;
+  };
+
   return (
     <Content className="container mt-4">
       <h2 className="title-styles">Préstamos</h2>
@@ -92,6 +96,7 @@ const PrestamoLista = ({ fetchPrestamos, prestamos }) => {
       </Button>
       {create && <Redirect to="/prestamos/crear"></Redirect>}
       <Table
+        scroll={{ y: getScrollY() }}
         className="ant-table"
         columns={columns}
         bordered

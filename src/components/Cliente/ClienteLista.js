@@ -124,12 +124,16 @@ const ClienteLista = ({ fetchClientes, clientes, deleteCliente }) => {
         Nuevo Cliente <i className="fas fa-plus-square ml-2"></i>
       </Button>
       {create && <Redirect to="/clientes/crear"></Redirect>}
-      <Table
-        className="ant-table"
-        columns={columns}
-        bordered
-        dataSource={dataMapped}
-      />
+      <div>
+        <Table
+          responsive
+          scroll={{ y: 370 }}
+          className="ant-table"
+          columns={columns}
+          bordered
+          dataSource={dataMapped}
+        />
+      </div>
     </Content>
   );
 };

@@ -6,7 +6,11 @@ import { Link } from "react-router-dom";
 import { LeftOutlined } from "@ant-design/icons";
 import { fetchTipoDeTransaccionById } from "../../state-mgmt/actions/tipo-de-transaccion.actions";
 
-const TipoDeTransaccionDetalles = ({ match, tipoDeTransaccionActual, fetchTipoDeTransaccionById }) => {
+const TipoDeTransaccionDetalles = ({
+  match,
+  tipoDeTransaccionActual,
+  fetchTipoDeTransaccionById,
+}) => {
   useEffect(() => {
     const init = async () => {
       await fetchTipoDeTransaccionById(match.params._id);
@@ -17,7 +21,7 @@ const TipoDeTransaccionDetalles = ({ match, tipoDeTransaccionActual, fetchTipoDe
   return (
     <div className="container mt-4">
       <Link to="/tipos-de-transacciones">
-        <Button className="mb-4">
+        <Button type="primary" className="mb-4">
           <LeftOutlined />
         </Button>
       </Link>
@@ -38,7 +42,6 @@ const TipoDeTransaccionDetalles = ({ match, tipoDeTransaccionActual, fetchTipoDe
     </div>
   );
 };
-
 
 const mapStateToProps = (state) => ({
   tipoDeTransaccionActual: state.tiposDeTransacciones.tipoDeTransaccionActual,

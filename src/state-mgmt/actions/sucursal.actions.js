@@ -44,7 +44,7 @@ export const updateSucursal = (_id, sucursal) => async (dispatch) => {
     "content-type": "application/json",
   };
 
-  const { data } = await axios.post(
+  const { data } = await axios.put(
     `${API_URL}/sucursales/${_id}`,
     sucursal,
     headers

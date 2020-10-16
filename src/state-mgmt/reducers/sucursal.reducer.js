@@ -9,6 +9,7 @@ import {
 const initialState = {
   sucursales: [],
   sucursal: {},
+  sucursalActual: {},
 };
 
 export default function (state = initialState, action) {
@@ -21,17 +22,7 @@ export default function (state = initialState, action) {
     case FETCH_SUCURSAL:
       return {
         ...state,
-        sucursal: action.payload,
-      };
-    case FETCH_SUCURSAL:
-      return {
-        ...state,
-        sucursal: action.payload,
-      };
-    case UPDATE_SUCURSAL:
-      return {
-        ...state,
-        sucursal: action.payload,
+        sucursalActual: action.payload,
       };
     case CREATE_SUCURSAL:
       return {

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createCliente } from "../../state-mgmt/actions/cliente.actions";
 import { Form, Input, Button } from "antd";
+import notyf from "../../utils/notyf";
 
 const INITIAL_CLIENTE = {
   
@@ -41,6 +42,7 @@ const ClienteFormulario = ({ createCliente }) => {
     try {
       await createCliente({ ...cliente });
 
+      notyf.success("Cliente creado satisfactoriamente.");
       setSuccess(true);
     } catch (error) {
       setError(error.response.data.error);

@@ -15,6 +15,7 @@ import notyf from "../../utils/notyf";
 import alertify from "alertifyjs";
 import { Link } from "react-router-dom";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { getKeyThenIncreaseKey } from "antd/lib/message";
 
 const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
   const [create, setCreate] = useState(false);
@@ -119,6 +120,10 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
     marginBottom: ".8rem",
   };
 
+  const getScrollY = () => {
+    return sucursales.length > 5 ? 370 : 410;
+  };
+
   const { Content } = Layout;
 
   return (
@@ -133,6 +138,8 @@ const SucursalLista = ({ fetchSucursales, sucursales, deleteSucursal }) => {
       </Button>
       {create && <Redirect to="/sucursales/crear"></Redirect>}
       <Table
+        responsive
+        // scroll={{ y: getScrollY() }}
         className="ant-table"
         columns={columns}
         bordered
