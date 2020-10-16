@@ -39,21 +39,12 @@ const PerfilFormulario = ({ createPerfil }) => {
     event.preventDefault();
 
     try {
-      setPerfil((prev) => ({
-        ...prev,
-      }));
-
       await createPerfil({ ...perfil });
 
       notyf.success("Perfil agregado satisfactoriamente.");
-
       setSuccess(true);
     } catch (error) {
-      if (error.response.data.error) {
-        setError(error.response.data.error);
-      } else {
-        setError("No se pudo crear el perfil.");
-      }
+      setError(error.response.data.error);
     }
   };
 

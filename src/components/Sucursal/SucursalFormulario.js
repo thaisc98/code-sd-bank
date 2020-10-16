@@ -42,8 +42,7 @@ const SucursalFormulario = ({ createSucursal }) => {
     try {
       await createSucursal({ ...sucursal });
 
-      notyf.success("¡Cajero creado satisfactoriamente!");
-
+      notyf.success("¡Sacursal creado satisfactoriamente!");
       setSuccess(true);
     } catch (error) {
       setError(error.response.data.error);
